@@ -1,0 +1,28 @@
+<html>
+<head>
+<script type="text/javascript">
+function drawDiagonal() {
+	var canvas=document.getElementById('a');
+	var context=canvas.getContext('2d');
+
+	context.beginPath();
+	context.moveTo(70,140);
+	context.lineTo(140,70);
+
+	context.stroke();
+}
+window.addEventListener("load",drawDiagonal,true);
+</script>
+
+<style type="text/css">
+	#a {
+		border:1px solid rgb(0,0,0);
+	}
+
+</style>
+	<title>canvas</title>
+</head>
+<body>
+	<canvas id="a" width="200" height="200">update your browser to enjoy canvas</canvas>
+</body>
+</html>

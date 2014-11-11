@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Geolocation</title>
+</head>
+
+<body onload="loadDemo()">
+	<header>
+		<h1>Odometer Demo</h1>
+		<h4>hello HTML5!</h4>
+	</header>
+
+	<div id="container">
+	
+	<section>
+		<article>
+			<header>
+				<h1>Your location</h1>
+			</header>
+
+			<p class="info" id="status">Geolocation is supported in your browser!</p>
+
+			<div class="geostatus">
+				<p id="latitude">Latitude:</p>
+				<p id="longitude">Longitude:</p>
+				<p id="accuracy">Accuracy:</p>
+				<p id="timestamp">Timestamp:</p>
+				<p id="currDist">Current distance traveled:</p>
+				<p id="totalDist">total distance traveled:</p>
+			</div>
+		</article>
+	</section>
+
+	<footer>
+		<h2>powered by HTML5 Geolocation API</h2>
+	</footer>
+
+	</div>
+	<script type="text/javascript">
+
+		var totalDistance=0.0;
+		var lastLat;
+		var lastLong;
+
+		Number.prototype.toRadians=function(){
+			return this*Math.PI/180;
+		}
+
+		function distance(latitude1,longitude1,latitude2,longitude2){
+			var earthRadius=6371;
+
+			var deltaLatitude=(latitude2-latidude1).toRadians();
+			var deltaLongitude=(longitude2-longitude1).toRadians();
+
+			latitude1=latitude1.toRadians(),latitude2=latitude2.toRadians();
+
+			var a=Math.sin(deltaLatitude/2)*
+				  Math.sin(deltaLatitude/2)+
+				  Math.cos(latitude1)*
+				  Math.cos(latitude2)*
+				  Math.sin(deltaLongitude/2)*
+				  Math.sin(deltaLongitude/2);
+
+			var c=2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+			var d=R*c;
+			return d;
+		}
+
+		function updateStatus(msg){
+			document.getElementById('status').innerHTML=msg;
+		}
+
+		function updateErrorStatus(msg){
+			document.getElementById('status').innerHTML="<strong>Eroor:</strong>"+msg;
+		}
+
+		function loadDemo(){
+			if(navigator.geolocation){
+				document.getElementById("status").innerHTML="geolocation supported!";
+				navigator.geolocation.watchPosition(updateLocation,handleLocationError,{timeout:10000});
+			}else{
+				document.getElementById("status").innerHTML="geolocation is not supported in your browser!";
+			}
+		}
+
+		function updateLocation(position){
+			var lat=position.coords.latitude;
+			var longi=position.coords.longitude;
+			var accuracy=position.coords.accuracy;
+			var timestamp=position.coords.timestamp;
+
+			document.getElementById("latitude").innerHTML="Latitude:"+latitude;
+			document.getElementById("longitude").innerHTML="Longitude:"+longitude;
+			document.getElementById("accuracy").innerHTML="Accuracy:"+accuracy;
+			document.getElementById("timestamp").innerHTML="Accuracy"+timestamp;
+
+			if(accuracy>=30000){
+				updateStatus('need more accurate values to caculate distance.');
+				return;
+			}
+
+			if ((lastLat!=NULL) && (lastLong!=NULL)) {
+				var currentDistance=distance(latitude,longitude,lastLat,lastLong);
+				document.getElementById('currDist').innerHTML="Current distance traveled:"+currentDistance.toFixed(2)+" km";
+
+				totalDistance+=currentDistance;
+				document.getElementById('totalDist').innerHTML="Total distance traveled:"+totalDistance.toFixed(2)+" km";
+
+				updateStatus("location sucessfully updated.");
+			}
+
+			lastLat=latitude;
+			lastLong=longitude;
+		}
+
+		function handleLocationError(error){
+			switch(error.code){
+				case 0:
+					updateErrorStatus(error.message);
+					break;
+				case 1:
+					updateErrorStatus('The user opted not to share his or her location');
+					break;
+				case 2:
+					updateErrorStatus('be unable to determine your location.'+error.message);
+					break;
+				case 3:
+					updateErrorStatus('time out');
+					break;
+			}
+		}
+	</script>
+</body>
+</html>

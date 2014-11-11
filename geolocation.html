@@ -1,42 +1,73 @@
 <!doctype html>
 <html>
 <head>
+	<title>定位器 - Ivydom</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<meta charset="utf-8">
-	<title>Geolocation</title>
+			<!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+        <link rel="stylesheet" href="css/font-awesome.min.css" />
+
+		<!-- jQueryMobileCSS - original without styling -->
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+
+		<!-- nativeDroid core CSS -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
+
+		<!-- nativeDroid: Light/Dark -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.dark.css"  id='jQMnDTheme' />
+
+		<!-- nativeDroid: Color Schemes -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
+
+		<!-- jQuery / jQueryMobile Scripts -->
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+        <style type="text/css">
+		.geostatus{
+			font-size: 20px;
+		}
+        </style>
 </head>
 
 <body onload="loadDemo()">
-	<header>
-		<h1>Odometer Demo</h1>
-		<h4>hello HTML5!</h4>
-	</header>
+    <div data-role="page" data-theme='b'>
 
-	<div id="container">
-	
-	<section>
-		<article>
-			<header>
-				<h1>Your location</h1>
-			</header>
 
-			<p class="info" id="status">Geolocation is supported in your browser!</p>
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+            <a href="http://ivydom.com" target="_blank" data-ajax="false"><i class='fa fa-bars'></i></a>
+            <h1>定位器 - Ivydom</h1>
+        </div>
 
-			<div class="geostatus">
-				<p id="latitude">Latitude:</p>
-				<p id="longitude">Longitude:</p>
-				<p id="accuracy">Accuracy:</p>
-				<p id="timestamp">Timestamp:</p>
-				<p id="currDist">Current distance traveled:</p>
-				<p id="totalDist">total distance traveled:</p>
+		<div data-role="content">
+	        <div class='inset'>
+	        	<div class='message info'>
+					<i class='fa fa-info'></i>
+					<p class="info" id="status">定位系统运行良好:)</p>
+				</div>
+
+				<div class="geostatus">
+					<p id="latitude">纬度：</p>
+					<p id="longitude">经度：</p>
+					<p id="accuracy">精确度：</p>
+					<p id="timestamp">UNIX时间戳：</p>
+					<p id="currDist">目前移动距离：</p>
+					<p id="totalDist">移动总距离：</p>
+				</div>
+	        </div>
+	    </div>
+
+		<div data-position="fixed" data-tap-toggle="false" data-role="footer" data-tap-toggle="false" data-theme='b'>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="http://ivydom.com"><i class='blIcon fa fa-cogs'></i>ivydom</a></li>
+					<li><a href=""><i class='blIcon fa fa-map-marker'></i>locate</a></li>
+					<li><a href="http://me.ivydom.com/guestbook"><i class='blIcon fa fa-share'></i>fuck it!</a></li>
+				</ul>
 			</div>
-		</article>
-	</section>
+		</div>
 
-	<footer>
-		<h2>powered by HTML5 Geolocation API</h2>
-	</footer>
-
-	</div>
+    </div>
 	<script type="text/javascript">
 
 		var totalDistance=0.0;
@@ -72,15 +103,15 @@
 		}
 
 		function updateErrorStatus(msg){
-			document.getElementById('status').innerHTML="<strong>Eroor:</strong>"+msg;
+			document.getElementById('status').innerHTML="<strong>Error:</strong>"+msg;
 		}
 
 		function loadDemo(){
 			if(navigator.geolocation){
-				document.getElementById("status").innerHTML="geolocation supported!";
+				document.getElementById("status").innerHTML="定位系统运行良好:)";
 				navigator.geolocation.watchPosition(updateLocation,handleLocationError,{timeout:10000});
 			}else{
-				document.getElementById("status").innerHTML="geolocation is not supported in your browser!";
+				document.getElementById("status").innerHTML="定位系统在你的浏览器上不能执行！";
 			}
 		}
 
@@ -90,24 +121,24 @@
 			var accuracy=position.coords.accuracy;
 			var timestamp=position.coords.timestamp;
 
-			document.getElementById("latitude").innerHTML="Latitude:"+latitude;
-			document.getElementById("longitude").innerHTML="Longitude:"+longitude;
-			document.getElementById("accuracy").innerHTML="Accuracy:"+accuracy;
-			document.getElementById("timestamp").innerHTML="Accuracy"+timestamp;
+			document.getElementById("latitude").innerHTML="纬度："+latitude;
+			document.getElementById("longitude").innerHTML="经度："+longitude;
+			document.getElementById("accuracy").innerHTML="精确度："+accuracy;
+			document.getElementById("timestamp").innerHTML="UNIX时间戳："+timestamp;
 
 			if(accuracy>=30000){
-				updateStatus('need more accurate values to caculate distance.');
+				updateStatus('精确度太低，需要更精确的值来显示！');
 				return;
 			}
 
 			if ((lastLat!=NULL) && (lastLong!=NULL)) {
 				var currentDistance=distance(latitude,longitude,lastLat,lastLong);
-				document.getElementById('currDist').innerHTML="Current distance traveled:"+currentDistance.toFixed(2)+" km";
+				document.getElementById('currDist').innerHTML="目前移动距离："+currentDistance.toFixed(2)+" km";
 
 				totalDistance+=currentDistance;
-				document.getElementById('totalDist').innerHTML="Total distance traveled:"+totalDistance.toFixed(2)+" km";
+				document.getElementById('totalDist').innerHTML="移动的总距离："+totalDistance.toFixed(2)+" km";
 
-				updateStatus("location sucessfully updated.");
+				updateStatus("成功更新位置！");
 			}
 
 			lastLat=latitude;
@@ -120,13 +151,13 @@
 					updateErrorStatus(error.message);
 					break;
 				case 1:
-					updateErrorStatus('The user opted not to share his or her location');
+					updateErrorStatus('用户不允许共享位置');
 					break;
 				case 2:
-					updateErrorStatus('be unable to determine your location.'+error.message);
+					updateErrorStatus('无法定位，详细信息：'+error.message);
 					break;
 				case 3:
-					updateErrorStatus('time out');
+					updateErrorStatus('定位超时');
 					break;
 			}
 		}

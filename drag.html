@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+<head>
+	<style type="text/css">
+		#member li{
+			cursor: move;
+		}
+
+		.highlighted{
+			background-color: yellow;
+		}
+
+		.validtarget{
+			background-color: rgb(222,222,222);
+		}
+	</style>
+</head>
+
+<body>
+	<ul id="members">
+		<li draggable="true" data-age="28">brain albers</li>
+		<li draggable="true" data-age="25">frank salim</li>
+		<li draggable="true" data-age="37">frank kemble</li>
+	</ul>
+
+	<div class="droplist">
+		<fieldset id="racersFiled">
+			<legend>Racers (by Age):</legend>
+			<ul id="racers"></ul>
+		</fieldset>
+	</div>
+
+	<div class="droplist">
+		<fieldset id="volunteersFiled">
+			<legend>volunteers (by Name):</legend>
+			<ul id="volunteers"></ul>
+		</fieldset>
+	</div>
+</body>
+</html>

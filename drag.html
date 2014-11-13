@@ -37,5 +37,42 @@
 			<ul id="volunteers"></ul>
 		</fieldset>
 	</div>
+
+	<script type="text/javascript">
+		var racers=[];
+		var volunteers=[];
+
+		var racerslist;
+		var volunteerslist;
+
+		function loadDemo(){
+			racerslist=document.getElementById('racers');
+			volunteerslist=document.getElementById('volunteers');
+
+			var lists=[racerslist,volunteerslist];
+
+			[].forEach.call(lists,function(list){
+				list.addEventListener('dragenter',handleDragEnter,false);
+				list.addEventListener('dragleave',handleDragLeave,false);
+				list.addEventListener('drag',handleDrag,false);
+			});
+
+			racerslist.addEventListener('dragover',handleDragOverRacers,false);
+			volunteerslist.addEventListener('dragover',handleDragOverVolunteers,false);
+
+			var fieldset=document.querySelectAll("#racersFiled,#volunteersFiled");
+			[].forEach.call(fieldset,function(memeber){
+				fieldset.addEventListener("dragover",handleDragOverOuter,false);
+			});
+
+			var members=document.querySelectAll("#memebers li");
+			[].forEach.call(memebers,function(memeber){
+				memeber.addEventListener("dragStart",handleDragStart,false);
+				memeber.addEventListener("dragEnd",handleDragEnd,false);
+			});
+		}
+
+		window.addEventListener("load",loadDemo,false);
+	</script>
 </body>
 </html>

@@ -60,12 +60,12 @@
 			racerslist.addEventListener('dragover',handleDragOverRacers,false);
 			volunteerslist.addEventListener('dragover',handleDragOverVolunteers,false);
 
-			var fieldset=document.querySelectAll("#racersFiled,#volunteersFiled");
+			var fieldset=document.querySelectorAll("#racersFiled,#volunteersFiled");
 			[].forEach.call(fieldset,function(memeber){
 				fieldset.addEventListener("dragover",handleDragOverOuter,false);
 			});
 
-			var members=document.querySelectAll("#memebers li");
+			var members=document.querySelectorAll("#memebers li");
 			[].forEach.call(memebers,function(memeber){
 				memeber.addEventListener("dragStart",handleDragStart,false);
 				memeber.addEventListener("dragEnd",handleDragEnd,false);
@@ -73,6 +73,104 @@
 		}
 
 		window.addEventListener("load",loadDemo,false);
+
+		function handleDrag(evt){
+			var transfer=evt.dataTransfer;
+		}
+
+		function handleDragStart(evt){
+			evt.effectAllowed="copy";
+
+			evt.dataTransfer.setData("text/plain",evt.target.textContent);
+			evt.dataTransfer.setData("text/html",evt.target.dataset.age);
+
+			racerslist.className="validtarget";
+			volunteerslist.className="validtarget";
+
+			return true;
+		}
+
+		function handleDragEnter(evt){
+			evt.stopPropagation();
+			evt.preventDefault();
+			return false;
+		}
+
+		function handleDragLeave(evt){
+			return false;
+		}
+
+		function handleDragOverOuter(evt){
+			if(evt.target.id=="racersFiled"){
+				racerslist.className="validtarget";
+			}else if(evt.target.id="volunteersFiled"){
+				volunteerslist.className="validtarget";
+			}
+
+			evt.stopPropagation();
+			return false;
+		}
+
+		function handleDragOverRacers(evt){
+			evt.dataTransfer.dropEffect="copy";
+			evt.stopPropagation();
+			evt.preventDefault();
+
+			racerslist.className="highlighted";
+			return false;
+		}
+
+		function handleDragOverVolunteers(evt){
+			evt.dataTransfer.dropEffect="copy";
+			evt.stopPropagation();
+			evt.preventDefault();
+
+			volunteerslist.className="highlighted";
+			return false;
+		}
+
+		function handleDrop(evt){
+			evt.preventDefault();
+			evt.stopPropagation();
+
+			var dropTarget=evt.target;
+
+			var text=evt.dataTransfer.getData("text/plain");
+
+			var group=volunteers;
+			var list=volunteerslist;
+
+			if((dropTarget.id != "volunteers") &&
+				(dropTarget.parentNode.id!="volunteers")){
+				text=evt.dataTransfer.getData("text/html")+":"+text;
+				group=racers;
+				list=racerslist;
+			}
+
+			if(group.indexOd(text)==-1){
+				group.push(text);
+				group.sort();
+
+				while(list.hasChildNodes()){
+					list.removeChild(list.lastChild);
+				}
+
+				[].forEach.call(group,function(person){
+					var newChild=document.createElement("li");
+					newChild.textContent=person;
+					list.appendChild(newChild);
+				});
+			}
+
+			return false;
+
+		}
+
+		function handleDragEnd(evt){
+			racerslist.className=null;
+			volunteerslist.className=null;
+			return false;
+		}
 	</script>
 </body>
 </html>

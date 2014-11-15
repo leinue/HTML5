@@ -1,0 +1,587 @@
+HTML5学习笔记
+
+HTML的新功能:
+
+	新的DOCTYPE和字符集
+	<!DOCTYPE HTML>
+	<meta charset=”utf-8”>
+
+	语义化标记:
+		Header,footer,section,article,aside,nav
+
+	新的selectors API:
+		QuerySelector()
+		实例:querySelector(“input.error”); 返回一个CSS类名为error的文本输入框
+
+	querySelectorAll()
+		实例:querySlectorAll("#results td"); 返回id值为results的元素下的所有单元格
+		多条规则用逗号隔开
+
+	Javascript日志和调试:
+		console.log() API
+
+	Window.JSON:现已内嵌
+
+	DOM Level 3:
+		addEventListener(),dispatchEvent()
+
+Canvas API:
+
+	基本CANVAS HTML 元素:
+		<canvas></canvas>
+
+	canvas坐标:
+
+		坐标从左上角开始,x轴沿着水平方向向右延伸,y轴沿垂直方向向下延伸.左上角x=0,y=0处被称为坐标原点.
+
+	替代内容:
+		如果页面不支持canvas可以用<canvas>当前浏览器不支持canvas</canvas>提示用户
+
+	CSS和canvas:
+
+		同大多数HTML元素一样,canvas元素也可以通过应用CSS的方式增加样式.
+
+	使用HTML5 Canvas API:
+
+		检测浏览器支持情况:
+			try{
+				document.createElement("canvas").getContext("2d");
+			}catch(e){
+				console.log("not supported!");
+			}
+
+			用try...catch...语句检测创建canvas对象时是否发生错误
+
+		在页面中加入canvas:
+			<canvas witdh="200" height="200"></canvas>
+
+			<canvas id="d" style="border:1px solid;" width="200" height="200"></canvas>
+
+			在canvas中绘制一条对角线:
+				function drawDiagonal() {
+					//取得canvas元素及其绘图上下文
+					var canvas=document.getElementById('heatmap');
+					var context=canvas.getContext('2d');
+
+					//用绝对坐标来创建一条路径
+					context.beginPath();
+					context.moveTo(70,140);
+					context.lineTo(140,70);
+
+					//将这条线绘制到canvas上
+					context.stroke();
+				}
+				window.addEventListener("load",drawDiagonal,true);
+
+				首先通过id来取得canvas的DOM,然后定义context变量调用canvas对象的getContext方法,通过传入2d来获取一个二维上下文
+				结束后要调用context.stroke()方法完成线条绘制.
+
+		变换:
+			用变换的方式在canvas上绘制对角线:
+				function drawDiagonal() {
+					//取得canvas元素及其绘图上下文
+					var canvas=document.getElementById('heatmap');
+					var context=canvas.getContext('2d');
+
+					//保存当前绘图状态
+					context.save();
+
+					//向右下方移动绘图上下文
+					context.translate(70,140);
+
+					//以原点为起点,绘制与前面相同的片段
+					context.beginPath();
+					context.moveTo(0,0);
+					context.lineTo(70,-70);
+
+					//将这条线绘制到canvas上
+					context.stroke();
+
+					//恢复所有的绘图状态
+					context.restore();
+				}
+				window.addEventListener("load",drawDiagonal,true);	
+
+				通过ID找到并访问canvas对象
+				接着通过调用canvas对象的getContext函数获取上下文对象
+				接下来保存尚未修改的context,这样即时进行了绘制和变换操作,也可以恢复到原来的状态
+				下一步是调用translat()函数
+				应用平移之后,就可以用普通的绘制操作来画对角线了.beginPath,moveTo和lineTo
+				调用context.stroke()显示在canvas上
+
+				旋转图像:
+					context.rotate(0);//旋转角度以弧度为单位
+
+		路径:
+			路径代表你希望呈现的任何形状,包括,多线条,曲线段,甚至是子路径.所以需要重点关注路径API.
+			第一个调用beginPath(),然后调用moveTo(x,y)和lineTo(x,y),最后还要调用stroke或fill显示图像.
+			有一个特殊的函数是closePath(),它会将坐标置空(也就是0,0)
+
+		描边样式:
+			context.lineWidth=n;//线条粗细
+			context.lineJoin='round';//平滑路径的接合点
+			context.strokeStyle='#000000';//画笔颜色
+			context.stroke();//绘制
+
+		填充样式:
+			//设置填充色
+			context.fillStyle='#000000';
+			context.fill();//开始填充
+
+			如果想看到描边路径,则需要在stroke前调用fill
+
+		填充矩形样式:
+			context.fillStyle='#00000';
+
+			//使用方便的fillRect函数
+			context.fillRect(0,0,0,0);
+			//参数顺序为:x,y,width,height
+
+			strokeRect():基于给定位置和坐标画出矩形的轮廓
+			clearRect():清除矩形区域内所有的内容并恢复到初始状态,即透明色(RGBA())
+
+		绘制曲线:
+			context.save();
+
+			context.translate(-10,35);
+			context.beginPath();
+
+			//第一条曲线向右上方弯曲
+			context.moveTo(0,0);
+			context.quadraticCurveTo(170,-50,260,-190);
+
+			//第二条曲线向右下方弯曲
+			context.quadraticCurveTo(310,-250,410,-250);
+
+			//使用其它色的粗线条来绘制路径
+			context.strokeSyle="#00000";
+			context.lineWidth=20;
+			context.stroke();
+
+			//恢复状态
+			context.restore();
+
+		在canvas中插入图片:
+			var bark=new Image();
+			bark.src="src";
+
+			bar.onload=function(){
+				//display on canvas
+			}
+
+			在canvas上显示图像:
+				context.drawImage(bark,x,y,width,height);
+
+		渐变:
+			1.创建渐变对象
+			2.为渐变对象设置颜色,指明多度方式
+			3.在context上为填充样式或者描边样式设置渐变
+
+			可以将渐变看作是颜色沿着一条线进行缓慢的变化.例如,如果为渐变对象提供了想,ab两个位置,不论是绘制还是填充,只要从a移动到b都会带来颜色的变化.
+			要设置显示哪种颜色,在渐变对象上使用addColorStop()即可.参数有两个,分别为颜色和偏移量.偏移量是一个从0.0到0.1之间的数值,代表沿着渐变线渐变的距离有多远.
+
+			放射性渐变:
+				createRadialGrandient(x0,y0,r0,x1,y1,r1);
+
+		背景图:
+			用createPattern代替drawImage
+			context.createPattern(Image,'repeat|repeat-x|repeat-y|no-repeat');
+
+		缩放canvas对象:
+			使用另一个变换函数,context.scale
+			context.scale(x,y);//表示图像要放大或缩小的量,如果为0.5表示是缩小一半
+
+			以下提供示例代码,并不可用
+
+			//第一次
+			context.save();
+			context.traslate();
+			drawCanvas();
+			context.restore();
+
+			//第二次
+			context.save();
+			context.traslate();
+
+			//放大
+			context.scale(x,y);
+			drawCanvas();
+			context.restore();
+
+		canvas文本:
+			fillText(text,x,y,maxwidth);
+			strokeText(text,x,y,maxWidth);
+
+			其它文本呈现方式(context属性):
+				font
+				textAlign
+				textBaseLine
+
+				以上都可亦应CSS字符串
+
+		应用阴影:
+			context属性:
+				shadowColor,shadowOffsetX,ShadowOffsetY,shadowBlur
+
+		像素数据:
+			获取canvas像素数据:
+				context.getImageData(sx,sy,sw,sh);
+				返回的对象包括三个属性:
+					width,每行有多少像素
+					height,每列有多少像素
+					data,一个数组,存储每个像素的RGBA值
+			修改canvas像素数据:
+				context.putImageData(imageData,dx,dy);
+			生成canvas像素数据:
+				context.createImageData(sw,sh);
+			其它方式创建Image元素:
+				context.toDataURL();
+
+SVG API:
+	
+	中文名:可缩放矢量图形,一种二维图形表示语言.
+	特点:canvas上的文本无法被搜索引擎获取,而SVG上的文本是可搜索的
+		 同HTML一样,她支持脚本操作和添加样式.还可以向SVG元素附加事件处理函数
+
+	在页面中添加SVG:
+		<svg widht="200" height="200"></svg>
+
+		还可以以静态图像的方式引用SVG文件:
+			<img src="example.svg">
+
+	简单的形状:
+		包含红边灰底矩形SVG:
+			<rect x="10" y="20" width="200" height="180" stroke="red" fill="#ccc" />
+		矩形和圆形:
+			<rect x="10" y="20" width="200" height="180" stroke="red" fill="#ccc" />
+			<cicrle cx="120" cy="80" r="40" stroke="#00f" fill="none" stroke-width="8" />
+		变换SVG元素:
+			SVG中有些组织元素,可用于将多个元素结合起来,使他们成为一个整体进行变换或链接.
+			<g>代表"组".组内成员可用ID来引用.组也可以作为一个整体进行变换.如果为组添加了变换属性,那么组中所有内容都会发生变换.
+
+			<g transform="translate(60.0) rotate(30) scale(0.75)" id="ShapeGroup">
+				<rect x="10" y="20" width="200" height="180" stroke="red" fill="#ccc" />
+				<cicrle cx="120" cy="80" r="40" stroke="#00f" fill="none" stroke-width="8" />
+			</g>
+	复用内容:
+		使用<def>元素定义,使用<use>元素使用
+
+		<svg width="400" height="500">
+			<defs>
+				<g transform="translate(60.0) rotate(30) scale(0.75)" id="ShapeGroup">
+					<rect x="10" y="20" width="200" height="180" stroke="red" fill="#ccc" />
+					<cicrle cx="120" cy="80" r="40" stroke="#00f" fill="none" stroke-width="8" />
+				</g>
+			</defs>
+
+			<use xlink:href="#ShapeGroup" transform="translate(60,0) scale(0.5)" />
+			<use xlink:href="#ShapeGroup" transform="translate(120,80) scale(0.4)" />
+			<use xlink:href="#ShapeGroup" transform="translate(20,60) scale(0.25)" />
+		</svg>
+
+	图案和渐变:
+		添加纹理:
+			<linearGradient id="redBlackGradient">
+				<stop offset="0%" stop-color="#000"></stop>
+				<stop offset="100%" stop-color="#f00"></stop>
+			</linearGradient>
+
+			然后在rect或circle元素中添加fill属性
+
+	SVG路径:
+		使用path元素
+		<path d="M-moveTo L-lineTo Q-二次曲线 Z-闭合路径" fill="none"></path>
+
+	SVG文本:
+		<svg>
+			<text x="" y="" font-family="" stroke="" fill="" font-size="" font-weight="">TEXT</text>
+		</svg>
+
+	SVG工具:
+		Adobe Illustrator和Inkscape
+
+Audio & Video API:
+
+	视频容器:
+		视频容器包含音频轨道,视频轨道和其他一些元数据.视频播放时,音频轨道和视频轨道是绑在一起的
+		元数据包括:视频的封面,标题,子标题和字幕.
+		主流视频容器支持以下格式:
+			.avi|.flv|.mp4|.mkv|.ogv
+
+	音频和视频解码器:
+		音频:AAC/MPEG-3/ogg vorbis
+		视频:H.264/VP8/Ogg theora
+
+	浏览器支持性检测:
+		<video src="video.webm" controls>not support</video>
+		将falsh作为后背的video元素:
+			<video src="video.webm" controls>
+				<object data="flash.swf" type="application/x-shockwave-flash">
+					<param name="movie" value="video.swf" />
+				</object>
+				not support
+			</video>
+
+	可访问性:
+		WebVTT:视频字幕
+
+	理解媒体元素:
+		声明媒体元素:
+			<audio controls src="xxx.mp3"></audio>
+			controls告诉浏览器显示通用的控件,包括开始停止跳播以及音量调节
+		使用source元素:
+			为了防止浏览器不支持相关容器或者解码器,需要使用src来进行多条声明:
+			<audio controls>
+				<source src="xxx.ogg">
+				<source src="xxx.mp3">
+			</audio controls>
+		使用audio元素中包含类型和解码器信息:
+			<audio controls>
+				<source src="xxx.ogg" type="audio/ogg;codecs=vorbis">
+				<source src="xxx.mp3" type="audio/mpeg">
+			</audio controls>
+			媒体控制:
+				自动播放:<audio autoplay>...</audio>
+				常用的javascript控制函数:
+					load() 用来在播放前预加载
+					play() 加载并播放audio或video,默认从头开始播放
+					pause() 暂停
+					canPLayType(type) 测试video元素可否播放某种MIME类型的文件
+						返回非二进制的"NULL","maybe","probably"
+				只读的媒体特性:
+					duration 整个媒体文件的播放时长,单位是s
+					paused 是否暂停
+					ended 是否播放完毕
+					startTime 返回最早的播放时间
+					error 错误代码
+					currentSrc 返回当前正在播放或已经加载的文件,对应于source元素
+				可用脚本控制的特性值:
+					autoplay 创建为自动播放或者查询是否是自动播放
+					loop 设置或查看是否为循环播放
+					currentTime 设置或查看当前播放时间
+					controls 设置或查询用户控制界面是否可见
+					volume 设置或查询音频音量的相对值,范围在0.0到1.0
+					muted 设置或查询音频文件为静音
+					autobuffer 是否进行缓冲加载,如果autoplay为真则忽略此特性
+
+Geolocation API:
+	
+	位置信息来源:
+		IP地址
+		三维坐标:
+			GPS/RFID/WIFI/MAC/GSM/ID OF CDMA PHONE
+	HTML5 Geolocation API浏览器支持情况:
+		navigator.geolocation属性,返回真代表支持,返回假代表不支持
+		if(navigator.geolocation){
+			document.getElementById("status").innerHTML="定位系统运行良好:)";
+			navigator.geolocation.watchPosition(updateLocation,handleLocationError,{timeout:10000});
+		}else{
+			document.getElementById("status").innerHTML="定位系统在你的浏览器上不能执行！";
+		}
+	位置请求:
+		单次定位请求:
+			void getCurrentPosition(in PositionCallback sucessCallback,
+									in optional PositionErrorCallback errorCallBack,
+									in optional PositionOptions options);
+			通过navigator.geolocation调用
+			successCallback指明位置数据可用时调用的函数
+			errorCallback指明出错时调用的函数
+			options对象:
+
+			请求用户位置的核心代码如下所示:
+				navigator.geolocation.getCurrentPosition(updateLocation,handleLocationError);
+
+				updateLocation():
+					只要浏览器具备访问位置信息的条件就会调用updateLocation函数,该函数只接受一个参数:位置对象.
+					这个对象包含坐标(coords特性)和一个获取位置数据时的UNIX时间戳
+					coords:
+						latitude 纬度
+						longtitude 经度
+						accuracy 准确度
+
+					updateLocation函数使用示例:
+
+						function updateLocation(position){
+							var lat=position.coords.latitude;
+							var longi=position.coords.longitude;
+							var accuracy=position.coords.accuracy;
+							var timestamp=position.coords.timestamp;
+
+							document.getElementById("latitude").innerHTML="纬度："+latitude;
+							document.getElementById("longitude").innerHTML="经度："+longitude;
+							document.getElementById("accuracy").innerHTML="精确度："+accuracy;
+							document.getElementById("timestamp").innerHTML="UNIX时间戳："+timestamp;
+						}
+				handleLocationError():
+					用来处理获取位置时的错误信息
+					PERMISSION_DENIED 1 用户选择拒绝浏览器获得位置信息
+					POSITION_UNAVAILABLE 2 位置信息不可用
+					TIMEOUT 3 确定位置信息超时
+
+					handleLocationError使用示例:
+						function handleLocationError(error){
+							switch(error.code){
+								case 0:
+									updateErrorStatus(error.message);
+									break;
+								case 1:
+									updateErrorStatus('用户不允许共享位置');
+									break;
+								case 2:
+									updateErrorStatus('无法定位，详细信息：'+error.message);
+									break;
+								case 3:
+									updateErrorStatus('定位超时');
+								break;
+							}
+						}
+
+					如果要同时处理正常情况和错误情况,应该把注意力集中到三个可选参数上:
+						enableHighAccuracy
+							启动HTML5 Geolocation高精度模式
+						timeOut
+							计算当前位置允许的最长时间,默认值为infinity,即无穷大
+						maximumAge
+							浏览器重新计算位置的时间间隔
+
+		重复性的位置更新请求:
+			一次更新:
+				navigator.geolocation.getCurrentPosition(updateLocation,handleLocationError);
+			重复更新:
+				navigator.geolocation.watchPosition(updateLocation,handleLocationError);
+				关闭更新:
+					clearWatch(watchID);
+					watchID是watchPosition的返回值
+
+Communication API:
+	跨文档消息通信:确保iframe,标签页,窗口间安全的进行跨源通信
+	消息事件的监听器:
+		window.addEventListener("message",messageHandle,true);
+		function messageHandle(e){
+			switch(e.origin){
+				case 'localhost':
+					//处理消息
+					break;
+				defalut:
+					//无法处理
+					break;
+			}
+		}
+
+		PostMessage API提供了一种交互方式,使得不同源的iframe可以与其子域名或父页面进行通信
+	理解源安全:
+		源:
+			规则(scheme)
+			主机(host)
+			端口(port)
+			注意:http和https不是同源
+			对待外部输入的时候,应使用element.context属性,比innerHTML安全一些
+		跨文档消息通信的浏览器支持情况:
+			if(typeof window.postMessage==='undefined'){
+				//该浏览器不支持postMessage
+			}
+		使用postMessage API:
+			发送消息:
+				window.postMessage("hello world","portal.example.com");
+				第一个参数是要发送的数据,第二个参数是消息传送的目的地
+				发送消息给iframe:
+					document.getElementByTagName("iframe")[0].contentWindow.postMessage("hello world","portal.example.com");
+			监听消息事件:
+				window.addEventListener("message",messageHandle,true);
+				function messageHandle(e){
+					switch(e.origin){
+					case 'localhost':
+						//处理消息
+						break;
+					defalut:
+						//无法处理
+						break;
+					}
+				}
+			处理消息事件:
+				e.data代表收到的数据
+	XMLHttpRequest Level 2:
+		作为XMLHttpRequest的改进版,主要集中在这两方面:
+			跨源XMLHttpRequest
+			进度事件(Progress events)
+		跨源XMLHttpRequest:
+			可以用来构建基于非同源服务的web应用程序
+			跨源HTTP请求包括一个origin头部,它为服务器http请求提供源信息
+		进度事件:
+			增加对进度的响应,并使用了有意义的进度名来明明进度事件
+			loadstart
+			progress
+			abort
+			error
+			load
+			loadend
+	使用XMLHttpRequest API:
+		浏览器支持情况检测:
+			查看使用XMLHttpRequest是否存在withCredentials属性:
+				var xhr=new XMLHttpRequest();
+				if(typeof xhr.withCredentials === undefined){
+					//不支持
+				}else{
+					//支持
+				}
+		构建跨源请求:
+			var xhr=new XMLHttpRequest();
+			xhr.open("get","host",true);
+		使用进度事件:
+			XMLHttpRequest Level 2不再使用数值型状态表示法,而是使用命名进度事件
+			为事件处理程序属性设置相应的回调函数后,就可以对这些事件进行监听
+			使用onprogress事件:
+				xhr.onprogress=function(e){
+					var total=e.total;
+					var loaded=e.loaded;
+
+					if(e.lengthComputable){
+						//利用进度信息做些事情
+					}
+				}
+				xhr.upload.onprogress=function(e){
+					var total=e.total;
+					var loaded=e.loaded;
+
+					if(e.lengthComputable){
+						//利用进度信息做些事情
+					}
+				}
+		二进制数据:
+			XMLHttpRequest Level 2支持Blod和ArrayBuffer对象
+			var a=new Unit8Array([1,2,3,4,5]);
+			var xhr=new XMLHttpRequest();
+			xhr.open("post","/data/",true);
+			console.log(a);
+			xhr.send(a.buffer);
+			属性responseType:
+				text|document|arrayBuffer|blob
+
+WebSockets API:
+	全双工通信信道.全双工连接需要的不仅仅是服务器到客户端的下行连接.一般使用两个连接,一个用语下行数据流,另一个用于上行数据流.
+	使用HTML5 WebSockets API:
+		if(window.WebSocket){
+			//可用
+		}else{
+			//不可用
+		}
+
+	API基本用法:
+		var url="xxxx";
+		w=new WebSocket(url);
+
+		使用协议:
+			w=new WebSocket(url,[protocol1,protocol2]);
+
+		添加事件监视器:
+			WebSocket有三个事件:open,close和message
+			事件处理有onopen,onclose,onmessage和onerror
+
+		发送消息:
+			w.send();
+
+Froms API:
+	输入型控件目录:
+		tel/email/url/search/range/number/progress(max,min,value,onchange)
+	使用HTML5 Forms API:
+		

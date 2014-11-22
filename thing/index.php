@@ -49,7 +49,7 @@
 
 	if(window.sessionStorage){
 	}else{
-		alert("您的浏览器不支持sessionStorage,请手动刷新页面获取最新坐标");
+		alert("您的浏览器不支持sessionStorage,有些功能无法使用");
 	}
 
 	getCoordinate();

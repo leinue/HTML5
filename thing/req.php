@@ -2,7 +2,8 @@
 
 function writeNew($longitude,$latitude){
 	$existed=readNew();
-	$count=$existed[2]+1;
+	$count=$existed['count']+1;
+	//print_r("count=".$count);
 	return file_put_contents("newest.wn","longitude=$longitude;latitude=$latitude;count=$count\r\n");
 }
 
@@ -20,18 +21,22 @@ function readNew(){
 	return $res;
 }
 
-$longitude=$_GET['longtitude'];
+$longitude=$_GET['longitude'];
 $latitude=$_GET['latitude'];
 
 //请求内容read为读取最新坐标,置空为写入新坐标
 $method=$_GET['method'];
 
 if(strlen($method)==0 && strlen($longitude)!=0 && strlen($latitude)!=0){
-	if(is_float($longitude) && is_float($latitude)){
+	if(is_numeric($longitude) && is_numeric($latitude)){
 		//写操作
-		writeNew($longitude,$latitude);
+		if(writeNew($longitude,$latitude)){
+			print("1");
+		}else{
+			print("-2");
+		}
 	}else{
-		print("-1"); //请求失败
+		print("-2"); //请求失败
 	}
 }elseif($method="read" && strlen($longitude)==0 && strlen($latitude)==0){
 	//读操作

@@ -1,0 +1,32 @@
+<html>
+<head>
+	<title>web workers application</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<input type="button" id="post" value="post a message">
+	<div id="support"></div>
+	<div id="display"></div>
+	<script type="text/javascript">
+		function loadDemo(){
+			if(typeof(Worker)!=="undefined"){
+				document.getElementById('support').innerHTML="您的浏览器支持Web Worker";
+			}
+		}
+
+		loadDemo();
+
+		worker=new Worker('echoWorker.js');
+
+		document.getElementById('post').onclick=function(){
+			worker.postMessage("fuck,son of bitch");
+		}
+
+		worker.addEventListener("message",messageHandler,true);
+		function messageHandler(e){
+			document.getElementById('display').innerHTML=e.data;
+		}
+
+	</script>
+</body>
+</html>

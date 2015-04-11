@@ -8,8 +8,13 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
 </head>
 <body>
-    <x3d id="tdobj-display"> 
+    <x3d id="tdobj-display">
         <scene>
+            <appearance>
+                <material diffuseColor='1 0 0'> </material>
+            </appearance>
+        
+            <navigationInfo id="head" headlight='true' type='"EXAMINE"'></navigationInfo>
             <background  skyColor="0 0 0"></background>
             <Viewpoint position="1.25762 50.85703 50.74621" orientation="-0.99104 -0.13344 -0.00551 0.46917"></Viewpoint>
             <directionalLight id="directional" direction='0 -1 0' on ="TRUE" intensity='2.0' shadowIntensity='0.0'></directionalLight>
@@ -31,6 +36,7 @@
         <ul>
             <li>Camera</li>
             <li>Lights</li>
+            <li>Themes</li>
         </ul>
     </div>
 
@@ -56,7 +62,7 @@
         </div>
     
         <div class="lights">
-            <input type="checkbox" checked="true" onclick="lightSwitch('directional ')">
+            <input type="checkbox" checked="true" onclick="lightSwitch('directional')">
             <label>directional light</label>
         </div>
     

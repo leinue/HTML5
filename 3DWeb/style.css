@@ -11,6 +11,8 @@ body{
 
 x3d{
 	background: rgba(170,170,170, 0.4);
+	height: 100%;
+	width: 100%;
 }
 
 .operate-panel,.little-panel{
@@ -49,7 +51,7 @@ x3d{
 }
 
 #list-panel{
-	top: 150px;
+	top: 182px;
 }
 
 #list-panel ul li{
@@ -57,7 +59,7 @@ x3d{
 }
 
 #list-panel ul li img{
-	width: 50%;
+	width: 40%;
 }
 
 .little-panel{

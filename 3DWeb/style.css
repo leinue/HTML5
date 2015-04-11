@@ -1,5 +1,6 @@
 body{
 	margin: 0px;
+	width: 100%;
 }
 
 #tdobj-display{
@@ -17,7 +18,7 @@ x3d{
 
 .operate-panel,.little-panel{
 	position: absolute;
-	font-size: 18px;
+	font-size: 16px;
 	background: rgb(170,170,170);
 	opacity: 0.6;
 	padding-left: 10px;
@@ -51,7 +52,7 @@ x3d{
 }
 
 #list-panel{
-	top: 182px;
+	top: 170px;
 }
 
 #list-panel ul li{
@@ -75,3 +76,22 @@ x3d{
 	cursor: pointer;
 }
 
+
+#model-desc{
+	width: 80.5796886%;
+	left: 210px;
+	top: 8px;
+	padding: 20px;
+	display: none;
+}
+
+#panel-Camera ul{
+	list-style:none;
+	margin-left: -40px;
+}
+
+#panel-Camera ul li{
+	cursor: pointer;
+	margin-bottom: 10px;
+	text-align: center;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Virtual Museum</title>
+    <script type="text/javascript" src="http://www.x3dom.org/download/x3dom.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://www.x3dom.org/download/x3dom.css"></link>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+</head>
+<body>
+    <x3d id="tdobj-display"> 
+        <scene>
+            <inline url="tower.x3d"></inline>
+        </scene>
+    </x3d>
+    
+    <div id="title-panel"><span>VIRTUAL MUSEUM</span></div>
+    
+    <div id="interactive-panel">
+        <ul>
+            <li>Virtual Museum</li>
+            <li>lighting</li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+    
+        $(document).ready(function(){
+            $('ul li,a,h1,h2,h3,h4,h5,h6,p,span').hover(
+                function(){
+                    $(this).stop().animate({opacity:0.6},'fast');
+                },
+                function(){
+                    $(this).stop().animate({opacity:1},'fast');
+                }
+            );
+
+            $('#title-panel').click(function(){
+                $('#interactive-panel').slideToggle();
+            });
+        });
+
+    </script>
+</body>
+</html>

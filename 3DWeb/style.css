@@ -7,19 +7,22 @@ body{
 	height: 100%;
 	border: none;
 	margin: 0px;
-	background: rgba(128, 128, 128, 0.4);
 }
 
-#interactive-panel,#title-panel{
+x3d{
+	background: rgba(170,170,170, 0.4);
+}
+
+.operate-panel,.little-panel{
 	position: absolute;
 	font-size: 18px;
-	background: rgb(31,31,31);
+	background: rgb(170,170,170);
 	opacity: 0.6;
 	padding-left: 10px;
 	padding-right: 10px;
-	top: 80px;
+	top: 56px;
 	left: 6px;
-	color: rgb(255,255,255);
+	color: rgb(0,0,0);
 	border-radius: 4px;
 	width: 180px;
 }
@@ -28,20 +31,45 @@ body{
 	position: absolute;
 	left: 6px;
 	font-size: 20px;
-	top: 30px;
+	top: 8px;
 	text-align: center;
 	padding-bottom: 10px;
 	padding-top: 10px;
 	cursor: pointer;
 }
 
-#interactive-panel ul{
+.operate-panel ul{
 	margin-left: -40px;
 	list-style:none;
 }
 
-#interactive-panel ul li{
+.operate-panel ul li{
 	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+#list-panel{
+	top: 150px;
+}
+
+#list-panel ul li{
+	text-align: center;
+}
+
+#list-panel ul li img{
+	width: 50%;
+}
+
+.little-panel{
+	top: 57px;
+	left: 210px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: none;
+}
+
+.little-panel .lights{
+	display: block;
 	cursor: pointer;
 }
 

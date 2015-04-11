@@ -10,22 +10,83 @@
 <body>
     <x3d id="tdobj-display"> 
         <scene>
+            <background  skyColor="0 0 0"></background>
+            <Viewpoint position="1.25762 50.85703 50.74621" orientation="-0.99104 -0.13344 -0.00551 0.46917"></Viewpoint>
+            <directionalLight id="directional" direction='0 -1 0' on ="TRUE" intensity='2.0' shadowIntensity='0.0'></directionalLight>
+            <PointLight id='point' on='TRUE' intensity='0.9000' ambientIntensity='0.0000' color='0.0 0.6 0.0' location='2 10 0.5 '  attenuation='0 0 0' radius='5.0000'> </PointLight>
+            <SpotLight id='spot' on ="TRUE" beamWidth='0.9' color='0 0 1' cutOffAngle='0.78' location='0 0 12' radius='22'></SpotLight>
             <inline url="tower.x3d"></inline>
+            <Transform translation="0 -9.0 0" rotation="1 0 0 -1.57">
+                <Shape>
+                    <Appearance><Material diffuseColor="0.5 0.5 0.5"></Material></Appearance>
+                    <Plane solid="false" size="30 30"></Plane>
+                </Shape>
+            </Transform>
         </scene>
     </x3d>
     
-    <div id="title-panel"><span>VIRTUAL MUSEUM</span></div>
+    <div id="title-panel" class="operate-panel"><span>VIRTUAL MUSEUM</span></div>
     
-    <div id="interactive-panel">
+    <div id="interactive-panel" class="operate-panel">
         <ul>
-            <li>Virtual Museum</li>
-            <li>lighting</li>
+            <li>Camera</li>
+            <li>Lights</li>
         </ul>
     </div>
+
+    <div id="list-panel" class="operate-panel">
+        <ul>
+            <li><img src=""></li>
+            <li><img src=""></li>
+            <li><img src=""></li>
+            <li><img src=""></li>
+        </ul>
+    </div>
+    
+    <div id="panel-Lights" class="little-panel">
+        
+        <div class="lights">
+            <input type="checkbox" checked="true" onclick="lightSwitch('point')">
+            <label>point light</label>
+        </div>
+
+        <div class="lights">
+            <input type="checkbox" checked="true" onclick="lightSwitch('spot')">
+            <label>spot light</label>
+        </div>
+    
+        <div class="lights">
+            <input type="checkbox" checked="true" onclick="lightSwitch('directional ')">
+            <label>directional light</label>
+        </div>
+    
+        <div class="lights">
+            <input type="checkbox" checked="true" onclick="headlight()">
+            <label>headlight</label>
+        </div>
+    </div>
+
     <script type="text/javascript">
     
+    function lightSwitch(id){
+        var light = document.getElementById(id);
+        if(light.getAttribute('on')!='TRUE')
+            light.setAttribute('on','TRUE');
+        else
+            light.setAttribute('on','FALSE');
+    }
+
+    function headlight(){
+        var h = document.getElementById("head");
+        if(h.getAttribute('headlight')=='true')
+            h.setAttribute('headlight', 'false');
+        else
+            h.setAttribute('headlight', 'true');
+    }
+
         $(document).ready(function(){
-            $('ul li,a,h1,h2,h3,h4,h5,h6,p,span').hover(
+
+            $('ul li,a,h1,h2,h3,h4,h5,h6,p,span,.lights').hover(
                 function(){
                     $(this).stop().animate({opacity:0.6},'fast');
                 },
@@ -35,7 +96,11 @@
             );
 
             $('#title-panel').click(function(){
-                $('#interactive-panel').slideToggle();
+                $('#interactive-panel,#list-panel').slideToggle();
+            });
+
+            $('#interactive-panel ul li').click(function(){
+                $('#panel-'+$(this).html()).slideToggle();
             });
         });
 

@@ -1,6 +1,14 @@
+x3d{
+	background: rgba(64,60,51, 0.8);
+	opacity: 0.6;
+}
+
 body{
 	margin: 0px;
 	width: 100%;
+	background-image: url(bg1.jpg);
+	background-position: no-repeat center;
+	background-size: cover;
 }
 
 #tdobj-display{
@@ -10,17 +18,11 @@ body{
 	margin: 0px;
 }
 
-x3d{
-	background: rgba(170,170,170, 0.4);
-	height: 100%;
-	width: 100%;
-}
-
 .operate-panel,.little-panel{
 	position: absolute;
 	font-size: 16px;
-	background: rgb(170,170,170);
-	opacity: 0.6;
+	background: rgb(196,207,190);
+	opacity: 0.4;
 	padding-left: 10px;
 	padding-right: 10px;
 	top: 56px;
@@ -89,12 +91,12 @@ x3d{
 	display: none;
 }
 
-#panel-Camera ul{
+#panel-Camera ul,#panel-Themes ul{
 	list-style:none;
 	margin-left: -40px;
 }
 
-#panel-Camera ul li{
+#panel-Camera ul li,#panel-Themes ul li{
 	cursor: pointer;
 	margin-bottom: 10px;
 	text-align: center;

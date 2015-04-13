@@ -83,21 +83,43 @@
         </ul>
     </div>
 
+    <div id="panel-Themes" class="little-panel">
+        <ul>
+            <li>bg</li>
+            <li>bg1</li>
+        </ul>
+    </div>
+
     <div id="model-desc" class="operate-panel">
         <p id="desc-bull">
-            1
+            The element embryo outlines the tobacco mosaic thickly todownturn
+The bottle body describes at the beginning of peony like you 
+Slowly penetration window concern I however
+On the xuan paper writes rapidly to this puts one half 
         </p>
         
         <p id="desc-chicken">
-            2
+            The glaze color exaggerates the female court attendant to attempt theflavor to harbor
+But you as soon as smiles like is in bud
+Your American wisp scatters could not go to me the place and so on the misty rain but I am waiting for you
+The smoke from kitchen chimneys curls raises separates theriver surely in imitated the previous dynasty in the bottle bottom bookthe elegance
+On when me for meets your foreshadowing 
         </p>
 
         <p id="desc-vase">
-            3
+            Color white brocade carp vividly Yu Wande
+When copy Song typeface inscription actually keeps thinkingabout you
+You hide in in the millennium secret
+Extremely exquisitely just like the embroidery needle to fallto the ground
+Outside the curtain the Japanese banana annoys the suddendownpour knocker to annoy the verdigris
+But I passed by that Chiangnan young town to annoy you
+In splashes ink in the landscape painting you to hide from theblack color deep place 
         </p>
 
         <p id="desc-dbvase">
-            4
+            Outside the Japanese banana curtain the rain sound isanxious,
+In the blue and white porcelain the appearance is old.
+Low-spirited being overwhelmed with emotion, only leaves is over.
         </p>
     </div>
 
@@ -164,6 +186,10 @@
                 $(this).parent().parent().slideToggle();
             });
 
+            $('#panel-Themes ul li').click(function(){
+                $('body').css('background','url('+$(this).html()+'.jpg)').css('backgroundSize','cover');
+                $(this).parent().parent().slideToggle();                
+            });
         });
 
     </script>

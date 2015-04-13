@@ -19,8 +19,8 @@
             <directionalLight id="directional" direction='0 -1 0' on ="TRUE" intensity='2.0' shadowIntensity='0.0'></directionalLight>
             <PointLight id='point' on='TRUE' intensity='0.9000' ambientIntensity='0.0000' color='0.0 0.6 0.0' location='2 10 0.5 '  attenuation='0 0 0' radius='5.0000'> </PointLight>
             <SpotLight id='spot' on ="TRUE" beamWidth='0.9' color='0 0 1' cutOffAngle='0.78' location='0 0 12' radius='22'></SpotLight>
-            <inline nameSpaceName="tower" mapDEFToID="true" onclick="displayInfo('tower')" url="genielamp.x3d"></inline>
-            <Transform translation="0 -9.0 0" rotation="1 0 0 -1.57">
+            <inline nameSpaceName="tower" id="x3d-display" mapDEFToID="true" onclick="displayInfo(this)" url="bull.x3d"></inline>
+            <Transform translation="0 -5.0 0" rotation="1 0 0 -1.57">
                 <Shape>
                     <Appearance><Material diffuseColor="0.5 0.5 0.5"></Material></Appearance>
                     <Plane solid="false" size="4 4"></Plane>
@@ -41,10 +41,10 @@
 
     <div id="list-panel" class="operate-panel">
         <ul>
-            <li><img src="8.jpg"></li>
-            <li><img src=""></li>
-            <li><img src=""></li>
-            <li><img src=""></li>
+            <li id="bull"><img src="bull.jpg"></li>
+            <li id="dbvase"><img src="dbvase.jpg"></li>
+            <li id="vase"><img src="vase.jpg"></li>
+            <li id="chicken"><img src="chicken.jpg"></li>
         </ul>
     </div>
     
@@ -77,7 +77,6 @@
             <li>EXAMINE</li>
             <li>WALK</li>
             <li>FLY</li>
-            <li>HELICOPTER</li>
             <li>LOOK AT</li>
             <li>TURANTABLE</li>
             <li>GAME</li>
@@ -85,12 +84,26 @@
     </div>
 
     <div id="model-desc" class="operate-panel">
-        dssdsd
+        <p id="desc-bull">
+            1
+        </p>
+        
+        <p id="desc-chicken">
+            2
+        </p>
+
+        <p id="desc-vase">
+            3
+        </p>
+
+        <p id="desc-dbvase">
+            4
+        </p>
     </div>
 
     <script type="text/javascript">
     
-        function lightSwitch(id){
+        function lightSwitch(){
             var light = document.getElementById(id);
             if(light.getAttribute('on')!='TRUE')
                 light.setAttribute('on','TRUE');
@@ -106,7 +119,12 @@
                 h.setAttribute('headlight', 'true');
         }
 
-        function displayInfo(){
+        function displayInfo(obj){
+            $('.d-active').css('display','none');
+            $('.d-active').removeClass('d-active');
+            var name=$(obj).attr('url').split('.');
+            $('#model-desc #desc-'+name[0]).css('display','block');
+            $('#model-desc #desc-'+name[0]).addClass('d-active');
             $('#model-desc').slideToggle();
         }
 
@@ -135,6 +153,15 @@
                     }
                 });
                 //$('#panel-'+$(this).)
+            });
+
+            $('#list-panel ul li').click(function(){
+                $('#x3d-display').attr('url',$(this).attr('id')+'.x3d');
+            });
+
+            $('#panel-Camera ul li').click(function(){
+                $('#head').attr('type',$(this).html());
+                $(this).parent().parent().slideToggle();
             });
 
         });

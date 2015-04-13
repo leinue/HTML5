@@ -85,6 +85,10 @@ x3d{
 	display: none;
 }
 
+#model-desc p{
+	display: none;
+}
+
 #panel-Camera ul{
 	list-style:none;
 	margin-left: -40px;

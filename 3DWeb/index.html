@@ -10,6 +10,7 @@
 <body>
     <x3d id="tdobj-display">
         <scene>
+        <transform DEF="ball">
             <appearance>
                 <material diffuseColor='1 0 0'></material>
             </appearance>
@@ -26,6 +27,11 @@
                     <Plane solid="false" size="4 4"></Plane>
                 </Shape>
             </Transform>
+        </transform>
+        <timeSensor DEF="time" cycleInterval="2" loop="true"></timeSensor>
+        <PositionInterpolator DEF="move" key="0 0.5 2" keyValue="0 0 0  2 3 6  10 0 0"></PositionInterpolator>
+        <Route fromNode="time" fromField ="fraction_changed" toNode="move" toField="set_fraction"></Route>
+        <Route fromNode="move" fromField ="value_changed" toNode="ball" toField="translation"></Route>
         </scene>
     </x3d>
     
@@ -122,6 +128,12 @@ In the blue and white porcelain the appearance is old.
 Low-spirited being overwhelmed with emotion, only leaves is over.
         </p>
     </div>
+    
+    <footer>
+        <div>
+            <p>Built by jQuery & X3DOM & CSS3</p>
+        </div>
+    </footer>
 
     <script type="text/javascript">
     
@@ -167,13 +179,17 @@ Low-spirited being overwhelmed with emotion, only leaves is over.
 
             $('#interactive-panel ul li').click(function(){
                 var elemClicked=$(this).html();
-                $('#panel-'+elemClicked).slideToggle();
-                $('.little-panel').each(function(){
-                    var list=$(this).attr('id').split('-')[1];
-                    if(list!=elemClicked && $(this).css('display')!='none'){
-                        $(this).slideToggle();
-                    }
-                });
+                if(elemClicke!='Animating'){
+                    $('#panel-'+elemClicked).slideToggle();
+                    $('.little-panel').each(function(){
+                        var list=$(this).attr('id').split('-')[1];
+                        if(list!=elemClicked && $(this).css('display')!='none'){
+                            $(this).slideToggle();
+                        }
+                    });
+                }else{
+
+                }
                 //$('#panel-'+$(this).)
             });
 

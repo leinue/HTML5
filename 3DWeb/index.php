@@ -47,33 +47,7 @@
 
     <div id="list-panel" class="operate-panel">
         <ul>
-        <?php 
-        function listDir($dir){
-            if(is_dir($dir)){
-                if ($dh = opendir($dir)) {
-                    while (($file = readdir($dh)) !== false){
-                        if((is_dir($dir."/".$file)) && $file!="." && $file!=".."){
-                            echo "<li id=\"\">model/$file<li>";
-                            listDir($dir."/".$file."/");
-                        }
-                        else{
-                            if($file!="." && $file!=".."){
-                                $ext=explode(".",$file);
-                                if($ext[count($ext)-1]!='x3d'){
-                                    $id=$ext[0];
-                                    echo "<li id=\"$id\"><img src=\"model/$file\"><li>";
-                                    $id='';
-                                }
-                            }
-                        }
-                    }
-                    closedir($dh);
-                }
-            }
-        }
 
-        listDir("model");
-        ?>
         </ul>
     </div>
     
@@ -188,8 +162,11 @@ Low-spirited being overwhelmed with emotion, only leaves is over.
         $(document).ready(function(){
 
             //load models using ajax
-            $.ajax('loadModel.php',function(data){
-                $('#list-panel ul li').append(data);
+            $.ajax({
+                url:"loadModel.php",
+                success:function(data){
+                    $('#list-panel ul').append(data);
+                }
             });
 
             $('ul li,a,h1,h2,h3,h4,h5,h6,p,span,.lights').hover(
@@ -233,6 +210,14 @@ Low-spirited being overwhelmed with emotion, only leaves is over.
             $('#panel-Themes ul li').click(function(){
                 $('body').css('background','url('+$(this).html()+'.jpg)').css('backgroundSize','cover');
                 $(this).parent().parent().slideToggle();                
+            });
+
+            $('#list-panel ul li').dblclick(function(){
+                var url=document.location.href+'model/'+$(this).attr('id')+'.x3d';
+                var a=$("<a href='"+url+"' target='_blank'>download</a>").get(0);  
+                var e=document.createEvent('MouseEvents');
+                e.initEvent('click', true, true);  
+                a.dispatchEvent(e); 
             });
         });
 

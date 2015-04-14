@@ -47,7 +47,7 @@
 
     <div id="list-panel" class="operate-panel">
         <ul>
-<?php 
+        <?php 
         function listDir($dir){
             if(is_dir($dir)){
                 if ($dh = opendir($dir)) {
@@ -73,7 +73,7 @@
         }
         //开始运行
         listDir("model");
-?>
+        ?>
         </ul>
     </div>
     
@@ -114,8 +114,31 @@
 
     <div id="panel-Themes" class="little-panel">
         <ul>
-            <li>bg</li>
-            <li>bg1</li>
+        <?php
+        function listBg($dir){
+            if(is_dir($dir)){
+                if ($dh = opendir($dir)) {
+                    while (($file = readdir($dh)) !== false){
+                        if((is_dir($dir."/".$file)) && $file!="." && $file!=".."){
+                            echo "<li id=\"\">model/$file<li>";
+                            listBg($dir."/".$file."/");
+                        }
+                        else{
+                            if($file!="." && $file!=".."){
+                                $ext=explode(".",$file);
+                                $id=$ext[0];
+                                echo "<li>$id<li>";
+                                $id='';
+                            }
+                        }
+                    }
+                    closedir($dh);
+                }
+            }
+        }
+        //开始运行
+        listBg("background");
+        ?>
         </ul>
     </div>
 
@@ -210,7 +233,7 @@ Low-spirited being overwhelmed with emotion, only leaves is over.
 
             $('#interactive-panel ul li').click(function(){
                 var elemClicked=$(this).html();
-                if(elemClicke!='Animating'){
+                if(elemClicked!='Animating'){
                     $('#panel-'+elemClicked).slideToggle();
                     $('.little-panel').each(function(){
                         var list=$(this).attr('id').split('-')[1];
@@ -234,7 +257,7 @@ Low-spirited being overwhelmed with emotion, only leaves is over.
             });
 
             $('#panel-Themes ul li').click(function(){
-                $('body').css('background','url('+$(this).html()+'.jpg)').css('backgroundSize','cover');
+                $('body').css('background','url(background/'+$(this).html()+'.jpg)').css('backgroundSize','cover');
                 $(this).parent().parent().slideToggle();                
             });
 

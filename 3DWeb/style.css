@@ -6,7 +6,7 @@ x3d{
 body{
 	margin: 0px;
 	width: 100%;
-	background-image: url(bg1.jpg);
+	background-image: url(background/bg1.jpg);
 	background-position: no-repeat center;
 	background-size: cover;
 }

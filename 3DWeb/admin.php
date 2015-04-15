@@ -17,6 +17,7 @@
             <ul>
                 <li id="models"><span class="admin-menu-active">Manage Models</span></li>
                 <li id="bg"><span>Manage Background</span></li>
+                <li id="upload"><span>Mange Uploading</span></li>
             </ul>
         </div>
 
@@ -79,6 +80,39 @@
         ?>
              </ul>
         </div>
+
+        <div id="upload-panel" class="operate-panel" style="display:none;">
+            <ul>
+                <li>
+                    Upload X3D Model
+                    <p>You must upload image view and X3D model</p>
+                    <p>And,the model and the image view should have the same name</p>
+                    <div class="model-upload">
+                        <form action="upload_model.php" method="post" enctype="multipart/form-data">
+                            <label for="file">.X3D model:</label>
+                            <input type="file" name="file" id="file" /> 
+                            <input type="submit" name="submit" value="Submit" />
+                        </form>
+                        <form action="upload_model.php" method="post" enctype="multipart/form-data">
+                            <label for="file">image view:</label>
+                            <input type="file" name="file" id="file" /> 
+                            <input type="submit" name="submit" value="Submit" />
+                        </form>
+                    </div>
+                </li>
+                <li>|</li>
+                <li>
+                    Upload Background
+                    <div class="model-upload">
+                        <form action="upload.php" method="post" enctype="multipart/form-data">
+                            <label for="file">background:</label>
+                            <input type="file" name="file" id="file" /> 
+                            <input type="submit" name="submit" value="Submit" />
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </section>
     
     <footer class="admin-footer">
@@ -117,16 +151,16 @@
                 $.ajax({
                     url:'deleteModel.php?file='+file,
                     success:function(data){
-                            $.ajax({
-                                url:'deleteModel.php?file='+imgurl,
-                                success:function(data){
-                                    if(data=='true'){
-                                        this_.fadeOut();
-                                    }else{
-                                        alert('delete failed');
-                                    }
+                        $.ajax({
+                            url:'deleteModel.php?file='+imgurl,
+                            success:function(data){
+                                if(data=='true'){
+                                    this_.fadeOut();
+                                }else{
+                                    alert('delete failed');
                                 }
-                            });
+                            }
+                        });
                     }
                 });
             });

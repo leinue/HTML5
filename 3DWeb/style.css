@@ -6,9 +6,28 @@ x3d{
 body{
 	margin: 0px;
 	width: 100%;
+	height: 100%;
 	background-image: url(background/bg1.jpg);
 	background-position: no-repeat center;
 	background-size: cover;
+}
+
+header{
+	margin-top: 10px;
+	width: 100%;
+	text-align: center;
+	font-size: 24px;
+	color: rgb(255,255,255);
+}
+
+section{
+	margin: 0 auto;
+	margin-top: 10px;
+	width: 95.16837%;
+	height: 550px;
+	background: rgb(255,255,255);
+	border-radius: 4px;
+	opacity: 0.6;
 }
 
 #tdobj-display{
@@ -100,6 +119,29 @@ body{
 	cursor: pointer;
 	margin-bottom: 10px;
 	text-align: center;
+}
+
+.admin-menu{
+	display: table;
+	width: 100%;
+}
+
+.admin-menu ul{
+	display: table-row;
+}
+
+.admin-menu ul li{
+	color: rgb(80,80,80);
+	font-size: 20px;
+	text-align: center;
+	display: table-cell;
+	cursor: pointer;
+}
+
+.admin-menu-active{
+	color: rgb(115,135,140);
+	border-bottom: 2px solid rgb(115,135,140);
+	padding-bottom: 3px;
 }
 
 footer{

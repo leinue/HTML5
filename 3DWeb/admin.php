@@ -19,7 +19,7 @@
             </ul>
         </div>
 
-        <div id="list-panel" class="operate-panel">
+        <div id="models-panel" class="operate-panel">
         <ul>
         <?php 
         function listDir($dir){
@@ -58,7 +58,7 @@
         </div>
     </footer>
     <script type="text/javascript">
-        $('a,h1,h2,h3,h4,h5,h6,p,span').hover(
+        $('a,h1,h2,h3,h4,h5,h6,p,span,img').hover(
             function(){
                 $(this).stop().animate({opacity:0.6},'fast');
             },

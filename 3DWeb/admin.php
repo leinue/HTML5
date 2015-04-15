@@ -36,7 +36,7 @@
                                     $ext=explode(".",$file);
                                     if($ext[count($ext)-1]!='x3d'){
                                         $id=$ext[0];
-                                        echo "<li id=\"$id\"><img src=\"model/$file\"><span>$id</span><li>";
+                                        echo "<li id=\"$id\"><img src=\"model/$file\"><span>$id</span><span><input type=\"button\" value=\"delete\" ></span><li>";
                                         $id='';
                                     }
                                 }
@@ -66,7 +66,7 @@
                             if($file!="." && $file!=".."){
                                 $ext=explode(".",$file);
                                 $id=$ext[0];
-                                echo "<li><img src=\"background/$file\"><span>$id</span><li>";
+                                echo "<li><img src=\"background/$file\"><span>$id</span><span><input type=\"button\" value=\"delete\" ></span><li>";
                                 $id='';
                             }
                         }
@@ -81,11 +81,12 @@
         </div>
     </section>
     
-    <footer>
+    <footer class="admin-footer">
         <div>
             <p>Virtual Musuem Built by jQuery & X3DOM & CSS3</p>
         </div>
     </footer>
+
     <script type="text/javascript">
         $(document).ready(function(){
             $('a,h1,h2,h3,h4,h5,h6,p,span,img').hover(
@@ -106,6 +107,28 @@
                 });
                 $('.admin-menu-active').removeClass('admin-menu-active');
                 $(this).find('span').addClass('admin-menu-active');
+            });
+
+            $('.operate-panel ul li span input').click(function(){
+                var file='model/'+$(this).parent().parent().attr('id')+'.x3d';
+                var imgurl=$(this).parent().parent().find('img').attr('src');
+                console.log(imgurl);
+                var this_=$(this).parent().parent();
+                $.ajax({
+                    url:'deleteModel.php?file='+file,
+                    success:function(data){
+                            $.ajax({
+                                url:'deleteModel.php?file='+imgurl,
+                                success:function(data){
+                                    if(data=='true'){
+                                        this_.fadeOut();
+                                    }else{
+                                        alert('delete failed');
+                                    }
+                                }
+                            });
+                    }
+                });
             });
         });
     </script>

@@ -144,27 +144,31 @@ section{
 	padding-bottom: 3px;
 }
 
-#models-panel{
+#models-panel,#bg-panel{
 	position: relative;
 	background: rgb(255,255,255);
 	display: table;
 	width: 100%;
 }
 
-#models-panel ul{
+#models-panel ul,#bg-panel ul{
 	display: table-row;
 }
 
-#models-panel ul li{
+#models-panel ul li,#bg-panel ul li{
 	text-align: center;
 	display: table-cell;
 	padding-left: 10px;
 	padding-right: 10px;
 }
 
-#models-panel ul li img{
+#models-panel ul li img,#bg-panel ul li img{
 	width: 100px;
 	height: 100px;
+}
+
+#models-panel ul li span,#bg-panel ul li span{
+	display: block;
 }
 
 footer{

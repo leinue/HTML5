@@ -136,7 +136,6 @@
                 }
             }
         }
-        //开始运行
         listBg("background");
         ?>
         </ul>

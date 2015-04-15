@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Virtual Museum Admin Panel</title>
+    <meta charset="utf8">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
 </head>
@@ -14,30 +15,59 @@
     <section>
         <div class="admin-menu">
             <ul>
-                <li><span class="admin-menu-active">Manage Models</span></li>
-                <li><span>Manage Background</span></li>
+                <li id="models"><span class="admin-menu-active">Manage Models</span></li>
+                <li id="bg"><span>Manage Background</span></li>
             </ul>
         </div>
 
-        <div id="models-panel" class="operate-panel">
-        <ul>
-        <?php 
-        function listDir($dir){
+        <div id="models-panel" class="operate-panel manager-active">
+            <ul>
+            <?php 
+            function listDir($dir){
+                if(is_dir($dir)){
+                    if ($dh = opendir($dir)) {
+                        while (($file = readdir($dh)) !== false){
+                            if((is_dir($dir."/".$file)) && $file!="." && $file!=".."){
+                                echo "<li id=\"\">model/$file<li>";
+                                listDir($dir."/".$file."/");
+                            }
+                            else{
+                                if($file!="." && $file!=".."){
+                                    $ext=explode(".",$file);
+                                    if($ext[count($ext)-1]!='x3d'){
+                                        $id=$ext[0];
+                                        echo "<li id=\"$id\"><img src=\"model/$file\"><span>$id</span><li>";
+                                        $id='';
+                                    }
+                                }
+                            }
+                        }
+                        closedir($dh);
+                    }
+                }
+            }
+            listDir("model");
+            ?>
+            </ul>
+        </div>
+
+        <div id="bg-panel" class="operate-panel" style="display:none;">
+             <ul>
+        <?php
+        function listBg($dir){
             if(is_dir($dir)){
                 if ($dh = opendir($dir)) {
                     while (($file = readdir($dh)) !== false){
                         if((is_dir($dir."/".$file)) && $file!="." && $file!=".."){
                             echo "<li id=\"\">model/$file<li>";
-                            listDir($dir."/".$file."/");
+                            listBg($dir."/".$file."/");
                         }
                         else{
                             if($file!="." && $file!=".."){
                                 $ext=explode(".",$file);
-                                if($ext[count($ext)-1]!='x3d'){
-                                    $id=$ext[0];
-                                    echo "<li id=\"$id\"><img src=\"model/$file\"><li>";
-                                    $id='';
-                                }
+                                $id=$ext[0];
+                                echo "<li><img src=\"background/$file\"><span>$id</span><li>";
+                                $id='';
                             }
                         }
                     }
@@ -45,11 +75,10 @@
                 }
             }
         }
-        //开始运行
-        listDir("model");
+        listBg("background");
         ?>
-        </ul>
-    </div>
+             </ul>
+        </div>
     </section>
     
     <footer>
@@ -58,14 +87,27 @@
         </div>
     </footer>
     <script type="text/javascript">
-        $('a,h1,h2,h3,h4,h5,h6,p,span,img').hover(
-            function(){
-                $(this).stop().animate({opacity:0.6},'fast');
-            },
-            function(){
-                $(this).stop().animate({opacity:1},'fast');
-            }
-        );
+        $(document).ready(function(){
+            $('a,h1,h2,h3,h4,h5,h6,p,span,img').hover(
+                function(){
+                    $(this).stop().animate({opacity:0.6},'fast');
+                },
+                function(){
+                    $(this).stop().animate({opacity:1},'fast');
+                }
+            );
+
+            $('.admin-menu ul li').click(function(){
+                var type=$(this).attr('id');
+                $('.manager-active').fadeOut(400,function(){
+                    $('.manager-active').removeClass('manager-active');
+                    $('#'+type+"-panel").fadeToggle();
+                    $('#'+type+"-panel").addClass('manager-active');
+                });
+                $('.admin-menu-active').removeClass('admin-menu-active');
+                $(this).find('span').addClass('admin-menu-active');
+            });
+        });
     </script>
 </body>
 </html>

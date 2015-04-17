@@ -1,15 +1,11 @@
 x3d{
 	background: rgba(64,60,51, 0.8);
-	opacity: 0.6;
+	opacity: 0.8;
 }
 
 body{
 	margin: 0px;
-	width: 100%;
-	height: 100%;
-	background-image: url(background/bg1.jpg);
-	background-position: no-repeat center;
-	background-size: cover;
+	/**/
 }
 
 header{
@@ -24,24 +20,27 @@ section{
 	margin: 0 auto;
 	margin-top: 10px;
 	width: 95.16837%;
-	height: 550px;
+	height: 570px;
 	background: rgb(255,255,255);
 	border-radius: 4px;
-	opacity: 0.6;
+	opacity: 0.9;
 }
 
 #tdobj-display{
-	width: 100%;
-	height: 100%;
 	border: none;
-	margin: 0px;
+	background: rgb(64,60,51);
+	width: 84.248332097%;
+	height: 627px;
+	margin-left: 210px;
+	margin-top: 8px;
+	border-radius: 4px;
 }
 
 .operate-panel,.little-panel{
 	position: absolute;
 	font-size: 16px;
 	background: rgb(196,207,190);
-	opacity: 0.4;
+	opacity: 0.8;
 	padding-left: 10px;
 	padding-right: 10px;
 	top: 56px;
@@ -73,7 +72,7 @@ section{
 }
 
 #list-panel{
-	top: 170px;
+	top: 200px;
 }
 
 #list-panel ul li{
@@ -81,7 +80,11 @@ section{
 }
 
 #list-panel ul li img{
-	width: 40%;
+	width: 30%;
+}
+
+#list-panel ul li span{
+	display: block;
 }
 
 .little-panel{
@@ -97,9 +100,8 @@ section{
 	cursor: pointer;
 }
 
-
 #model-desc{
-	width: 80.5796886%;
+	width: 81.248332097%;
 	left: 210px;
 	top: 8px;
 	padding: 20px;
@@ -176,13 +178,19 @@ section{
 }
 
 footer{
-	text-align: center;
 	position: absolute;
 	font-size: 20px;
-	color: rgb(255,255,255);
-	bottom: 0;
+	color: rgb(0,0,0);
 	width: 100%;
+	height: 60px;
 	text-align: center;
+	background: rgb(196,207,190);
+	opacity: 0.8;
+	top: 97.5%;
+}
+
+footer p a{
+	text-decoration: none;
 }
 
 .admin-footer{

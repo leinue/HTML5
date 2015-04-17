@@ -2,24 +2,21 @@
 <html>
 <head>
     <title>Virtual Museum</title>
-    <script type="text/javascript" src="x3dom.js"></script>
-    <link rel="stylesheet" type="text/css" href="x3dom.css"></link>
+    <script type="text/javascript" src="http://www.x3dom.org/download/x3dom.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://www.x3dom.org/download/x3dom.css"></link>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="jquery-1.8.0.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
 </head>
 <body>
     <x3d id="tdobj-display">
         <scene>
-        <Viewpoint id="front" position="-0.07427 -0.15329 -4.79608" orientation="-0.01451 0.99989 0.00319 3.15833" description="camera"></Viewpoint>
-        <Viewpoint id="right" position="-2.43383 1.07351 -1.28700" orientation="-0.00318 -0.99950 -0.03159 2.06609" description="camera"></Viewpoint>
-        <Viewpoint id="left" position="2.70190 1.05153 -0.57128" orientation="-0.08205 0.99612 -0.03175 1.73722" description="camera"></Viewpoint>
-        <Viewpoint id="top" position="0.05087 3.78235 -1.75890" orientation="-0.00307 0.87466 0.48473 3.12040" description="camera"></Viewpoint>
-        <transform DEF="ball" width="600px" height="650px">
+        <transform DEF="ball">
             <appearance>
                 <material diffuseColor='1 0 0'></material>
             </appearance>
             <navigationInfo id="head" headlight='true' type='"EXAMINE"'></navigationInfo>
             <background  skyColor="0 0 0"></background>
+            <Viewpoint position="-0.25762 3.85703 6.74621" orientation="-0.99104 -0.13344 -0.00551 0.46917"></Viewpoint>
             <directionalLight id="directional" direction='0 -1 0' on ="TRUE" intensity='2.0' shadowIntensity='0.2'></directionalLight>
             <PointLight id='point' on='TRUE' intensity='0.9000' ambientIntensity='0.0000' color='0.0 0.6 0.0' location='2 10 0.5 '  attenuation='0 0 0' radius='5.0000'> </PointLight>
             <SpotLight id='spot' on ="TRUE" beamWidth='1' color='250 0 1' cutOffAngle='0.78' location='0 0 12' radius='22'></SpotLight>
@@ -31,7 +28,7 @@
                 </Shape>
             </Transform>
         </transform>
-        <timeSensor DEF="time" cycleInterval="2" loop="false"></timeSensor>
+        <timeSensor DEF="time" cycleInterval="2" loop="true"></timeSensor>
         <PositionInterpolator DEF="move" key="0 0.5 2" keyValue="0 0 0  2 3 6  10 0 0"></PositionInterpolator>
         <Route fromNode="time" fromField ="fraction_changed" toNode="move" toField="set_fraction"></Route>
         <Route fromNode="move" fromField ="value_changed" toNode="ball" toField="translation"></Route>
@@ -45,7 +42,6 @@
             <li>Camera</li>
             <li>Lights</li>
             <li>Themes</li>
-            <li id="skeleton-display" title="display skeleton">Skeleton</li>
         </ul>
     </div>
 
@@ -55,6 +51,33 @@
             <li id="chicken"><img src="model/chicken.jpg"><span>chicken</span></li>
             <li id="dbvase"><img src="model/dbvase.jpg"><span>dbvase</span></li>
             <li id="vase"><img src="model/vase.jpg"><span>vase</span></li>
+        <?php 
+        /*function listDir($dir){
+            if(is_dir($dir)){
+                if ($dh = opendir($dir)) {
+                    while (($file = readdir($dh)) !== false){
+                        if((is_dir($dir."/".$file)) && $file!="." && $file!=".."){
+                            echo "<li id=\"\">model/$file<li>";
+                            listDir($dir."/".$file."/");
+                        }
+                        else{
+                            if($file!="." && $file!=".."){
+                                $ext=explode(".",$file);
+                                if($ext[count($ext)-1]!='x3d'){
+                                    $id=$ext[0];
+                                    echo "<li id=\"$id\"><img src=\"model/$file\"><span>$id</span><li>";
+                                    $id='';
+                                }
+                            }
+                        }
+                    }
+                    closedir($dh);
+                }
+            }
+        }
+        //开始运行
+        listDir("model");*/
+        ?>
         </ul>
     </div>
     
@@ -90,20 +113,46 @@
             <li>LOOK AT</li>
             <li>TURANTABLE</li>
             <li>GAME</li>
-            <li onclick="document.getElementById('right').setAttribute('set_bind','true');">Right</li>
-            <li onclick="document.getElementById('left').setAttribute('set_bind','true');">Left</li>
-            <li onclick="document.getElementById('front').setAttribute('set_bind','true');">Front</li>
-            <li onclick="document.getElementById('top').setAttribute('set_bind','true');">Top</li>
         </ul>
     </div>
 
     <div id="panel-Themes" class="little-panel">
         <ul>
 
-            <li>bg</li>
-            <li>bg1</li>
+            <li>Lights</li>
+            <li>Themes</li>
         </ul>
     </div>
+
+    <!--<div id="list-panel" class="operate-panel">
+        <ul>
+            
+        <?php
+        /*function listBg($dir){
+            if(is_dir($dir)){
+                if ($dh = opendir($dir)) {
+                    while (($file = readdir($dh)) !== false){
+                        if((is_dir($dir."/".$file)) && $file!="." && $file!=".."){
+                            echo "<li id=\"\">model/$file<li>";
+                            listBg($dir."/".$file."/");
+                        }
+                        else{
+                            if($file!="." && $file!=".."){
+                                $ext=explode(".",$file);
+                                $id=$ext[0];
+                                echo "<li>$id</li>";
+                                $id='';
+                            }
+                        }
+                    }
+                    closedir($dh);
+                }
+            }
+        }
+        listBg("background");*/
+        ?>
+        </ul>
+    </div>-->
 
     <div id="model-desc" class="operate-panel">
         <p id="desc-bull">
@@ -140,7 +189,7 @@ Low-spirited being overwhelmed with emotion, only leaves is over.
     
     <footer>
         <div>
-            <p>Built by jQuery & X3DOM & CSS3 | <a href="javascript:void(0)">About us</a> | <a href="javascript:void(0)">Contact us</a></p>
+            <p>Built by jQuery & X3DOM & CSS3</p>
         </div>
     </footer>
 
@@ -165,9 +214,9 @@ Low-spirited being overwhelmed with emotion, only leaves is over.
         function displayInfo(obj){
             $('.d-active').css('display','none');
             $('.d-active').removeClass('d-active');
-            var name=$(obj).attr('url').split('.')[0].split('/');
-            $('#model-desc #desc-'+name[1]).css('display','block');
-            $('#model-desc #desc-'+name[1]).addClass('d-active');
+            var name=$(obj).attr('url').split('.');
+            $('#model-desc #desc-'+name[0]).css('display','block');
+            $('#model-desc #desc-'+name[0]).addClass('d-active');
             $('#model-desc').slideToggle();
         }
 
@@ -230,10 +279,6 @@ Low-spirited being overwhelmed with emotion, only leaves is over.
                 var e=document.createEvent('MouseEvents');
                 e.initEvent('click', true, true);  
                 a.dispatchEvent(e); 
-            });
-
-            $('#skeleton-display').click(function(){
-
             });
         });
 

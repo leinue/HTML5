@@ -15,8 +15,8 @@ function createCensusMap(divId, usMap, censusData) {
 
     var columnData = d3.map()
     // % Population with Bachelor's Degree (25+)
-    censusData.forEach(function(d) { if (d.fips.slice(2,5) == "000") {
-	columnData.set(+d.fips.slice(0,2), +d.EDU685213); } });
+    //censusData.forEach(function(d) { if (d.fips.slice(2,5) == "000") {
+	//columnData.set(+d.fips.slice(0,2), +d.EDU685213); } });
     console.log(columnData)
 
     var colExtent = d3.extent(columnData.values());
@@ -105,5 +105,5 @@ function processData(errors, censusData, usMap) {
 
 queue()
     .defer(d3.csv, "census-states.csv")
-    .defer(d3.json, "http://www.cis.umassd.edu/~dkoop/cis467/us-states.json")
+    .defer(d3.json, "us-states.json")
     .await(processData);

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<head>
+<script src="d3.min.js" charset="utf-8"></script>
+<!--	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>-->
+<style type="text/css">
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+}
+
+.axis text {
+    font-family: Consolas;
+    font-size: 12px;
+}
+
+.line {
+    fill: none;
+    stroke: blue;
+}
+
+.linecircle {
+    fill: red;
+    stroke: red;
+}
+
+#back_year,
+#next_year {
+    background-color: lightblue;
+    padding: 5px;
+}
+#back_year:hover,
+#next_year:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+	<p>Order by years: 
+		<span id="back_year">back 5 years</span> | 
+		<span id="next_year">next 5 years</span>
+
+<script type="text/javascript">
+/**
+ * Main Function
+ */
+/* Init SVG */
+var margin = {top: 20, right: 20, bottom: 30, left: 50},
+	width = 800,
+	height = 450;
+var container = d3.select('body')
+				.append('svg')
+				.attr('width', width + 70)//define the width of SVG
+				.attr('height', height + 70);//define the height of SVG
+var svg = container.append('g')
+				.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+/* Init Axis Params */
+var x = d3.scale.linear();
+var y = d3.scale.linear();
+var xAxis = d3.svg.axis();
+var yAxis = d3.svg.axis();
+var line = d3.svg.line();
+var path;
+var xBar;
+var yBar;
+
+/* Get Data from DataFile */
+var dataset;//data set
+var index = 0;//scale
+var total = 0;//data length
+d3.csv("data.csv", function(error,csvdata) {
+			if(error){
+				console.log(error);
+			}
+			csvdata.sort(function(a,b){return a.Year>b.Year?1:-1});//sort from small to large
+			dataset = csvdata;
+			index = 0;
+			//handle data
+			var draw_data = Array.apply(0, Array(5)).map(function(item, i) {
+					return dataset[i++];
+				});
+
+			drawBars(draw_data);
+		});
+
+/* Next Link Click */
+d3.select("#next_year").on("click", function() {
+	var num = 5;
+	index = index + 5;
+	if(index >= dataset.length){
+		index = index - 5;
+	}
+	if ((index + 5) > dataset.length){
+		num = dataset.length - index
+	}
+	var draw_data = Array.apply(0, Array(num)).map(function(item, i) {
+		return dataset[index+(i++)];
+	});
+	redraw(draw_data);
+	//drawBars(index);
+});
+
+/* Back Link Click */
+d3.select("#back_year").on("click", function() {
+	index = index - 5;
+	if(index < 0){
+		index = index + 5;
+	}
+	var draw_data = Array.apply(0, Array(5)).map(function(item, i) {
+			return dataset[index+(i++)];
+	});
+	redraw(draw_data);
+	//drawBars(index);
+});
+
+
+
+/**
+ * Functions
+ */
+/* Transition */
+function redraw(draw_data) {
+	//remove the exists SVG
+	d3.select('svg').remove();
+	//create new SVG
+	container = d3.select('body')
+				.append('svg')
+				.attr('width', width + 70)//define the width of SVG
+				.attr('height', height + 70);//define the height of SVG
+	svg = container.append('g')
+				.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+	drawBars(draw_data);
+}
+
+/* Draw Line Chart */
+function drawBars(draw_data){
+	//define scale of x & y axis
+	x = d3.scale.linear()
+		.domain(d3.extent(draw_data, function(d) { return d.Year; }))//Value Range of X axis
+		.range([0, width]);//Position Range of X axis in SVG
+	y = d3.scale.linear()
+		.domain([0, d3.max(draw_data, function(d) { return d.Value; })])//Value Range of Y axis
+		.range([height, 0]);//Position Range of Y axis in SVG
+	//define x & y axis
+	xAxis = d3.svg.axis()
+		.scale(x)
+		.orient('bottom')//scale positon(under the line)
+		.ticks(5);//scale counts
+	yAxis = d3.svg.axis()
+		.scale(y)
+		.orient('left')//scale positon(left of the line)
+		.ticks(10);//scale counts
+	//define params and add x & y to SVG
+	xBar = svg.append('g')
+		.attr('class', 'axis')
+		.attr("transform", "translate(0,"+ height +")")//define X axis start position
+		.call(xAxis);
+	svg.append('text')//description of X axis
+		.attr('x', width/2)//define X position of text(years --->>)
+		.attr('y', height+35)//define Y position of text(years --->>)
+		.text('Years --->>');
+	yBar = svg.append('g')
+		.attr('class', 'axis')
+		.call(yAxis);
+	svg.append('text')//description of Y axis
+		.attr('x', 3)//define Y position of text(years --->>)
+		.attr('y', 3)//define Y position of text(years --->>)
+		.text('Value');
+
+	//define line
+	line = d3.svg.line()
+		.x(function(d) { return x(d.Year); })
+		.y(function(d) { return y(d.Value); })
+		.interpolate('linear');
+	//add line to SVG
+	svg.append('path')
+		.attr('class', 'line')
+		.attr('d', line(draw_data));
+
+	//add point to SVG
+	svg.selectAll('circle')
+		.data(draw_data)
+		.enter()
+		.append('g')
+		.append('circle')
+		.attr('class', 'linecircle')
+		.attr('cx', line.x())
+		.attr('cy', line.y())
+		.attr('r', 3.5)
+		.on('mouseover', function() {
+					d3.select(this).transition().duration(500).attr('r', 5);
+				})
+		.on('mouseout', function() {
+					d3.select(this).transition().duration(500).attr('r', 3.5);
+				});
+}
+</script>
+
+</body>
+</html>

@@ -19,6 +19,36 @@ function createBrushedVis(divId, usMap, vehicleTheftData) {
 	.enter().append("path")
 	.attr("d", path)
 	.attr("class", "state-boundary")
+	.on("mouseover",function(d,i){
+		for (var j = 0; j < 10; j++) {
+			var dkey=vehicleTheftData[i]['rankings'][j]['model'];
+				dkey=dkey.replace(" ","-");
+				dkey=dkey.replace("/","-");
+				dkey=dkey.replace("(","-");
+				dkey=dkey.replace(")","-");
+				dkey=dkey.replace(" ","");
+				dkey=dkey.replace(" ","-");
+			d3.select('.bar #'+dkey)
+			.attr('fill','rgb(255,0,0)');
+		};
+        d3.select(this)
+        .attr("class",'highlight');
+    })
+    .on("mouseout",function(d,i){
+    	for (var j = 0; j < 10; j++) {
+			var dkey=vehicleTheftData[i]['rankings'][j]['model'];
+				dkey=dkey.replace(" ","-");
+				dkey=dkey.replace("/","-");
+				dkey=dkey.replace("(","-");
+				dkey=dkey.replace(")","-");
+				dkey=dkey.replace(" ","");
+				dkey=dkey.replace(" ","-");
+			d3.select('.bar #'+dkey)
+			.attr('fill','#ddd');
+		};
+        d3.select(this)
+        .attr("class",'nonhighlight');
+    })
 
     var bWidth = 400,
 	bHeight = 400;
@@ -50,6 +80,19 @@ function createBrushedVis(divId, usMap, vehicleTheftData) {
 	.attr("y", function(d, i) { return 30 + i * 16;})
 	.attr("width", function(d) { return 2*d.value; })
 	.attr("height", 16)
+	.attr("fill","#ddd")
+	.attr("stroke","#000")
+	.attr("stroke-width",".5px")
+	.attr('id',function(d,i){
+		var dkey=d['key'];
+		dkey=dkey.replace(" ","-");
+		dkey=dkey.replace("/","-");
+		dkey=dkey.replace("(","-");
+		dkey=dkey.replace(")","-");
+		dkey=dkey.replace(" ","");
+		dkey=dkey.replace(" ","-");
+		return dkey;
+	})
 
     bars.append("text")
 	.attr("x", function(d,i) {return 124; })
@@ -64,6 +107,6 @@ function processData(errors, usMap, vehicleTheftData) {
 }
 
 queue()
-    .defer(d3.json, "http://www.cis.umassd.edu/~dkoop/cis467/us-states.json")
-    .defer(d3.json, "http://www.cis.umassd.edu/~dkoop/cis467/vehicle-theft.json")
+    .defer(d3.json, "us-states.json")
+    .defer(d3.json, "vehicle-theft.json")
     .await(processData);

@@ -32,8 +32,6 @@ function createMostStolenMap(divId, usMap, vehicleTheftData) {
 	.attr("stroke","rgb(255,255,255)")
 	.attr("stroke-width",1)
 	.attr("fill", function(d,i){
-		//console.log(d['geometry']['coordinates']);
-		//console.log(d);
 		for (var j = 0; j < vehicleTheftData.length; j++) {
 			topList[j]=vehicleTheftData[j]['rankings'][0]['model'];
 			stateList[j]=vehicleTheftData[j]['state'];
@@ -43,12 +41,15 @@ function createMostStolenMap(divId, usMap, vehicleTheftData) {
         	if (!hash[elem]) {
            		result.push(elem);
             	hash[elem] = true;
-            	stateList.splice(k,1);
         	}
     	}
-		var rgbcolor=color[i];
 		sessionStorage.resultList=JSON.stringify(result);
-		console.log(stateList);
+		for (var k = 0; k < stateList.length; k++) {
+			if(stateList[k]==d['properties']['NAME']){
+				break;
+			}
+		};
+		var rgbcolor=color[k];
 		return rgbcolor;
 	})
 	.on("mouseover",function(d,i){

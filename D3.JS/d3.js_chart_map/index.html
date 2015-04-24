@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<head>
+	<title>chart map table</title>
+	<style>
+ 
+		.axis path,
+		.axis line{
+			fill: none;
+			stroke: black;
+			shape-rendering: crispEdges;
+		}
+		 
+		.axis text {
+			font-family: sans-serif;
+			font-size: 11px;
+		}
+ 
+	</style>
+</head>
+<body>
+
+	<div id="chart">
+		
+	</div>
+
+	<div id="map">
+		
+	</div>
+
+	<div id="table">
+		
+	</div>
+
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script type="text/javascript">
+
+		var width = 600;
+		var height = 600; 
+		
+		var svg = d3.select("#chart").append("svg")
+								.attr("width",width)
+								.attr("height",height);
+
+		var dataset=[];
+		var yearSet=['2000','2005','2006','2007','2008','2009','2010','2011','2012','2013'];
+		var numSet=[];
+
+		var xScale=d3.scale.linear()
+					.domain([0,2175])
+					.range([0,width]).nice();
+
+		var yScale=d3.scale.linear()
+					 .domain([0,2175])
+					 .range([0,width]).nice();
+
+		d3.csv("EDUADULT-TRY-PC_25_64-A.csv",function(error,csv){  
+        	if(error){  
+            	console.log(error);
+        	}
+
+        	csv.forEach(function(e){
+        		//console.log(e['Location']);
+        		yearSet.forEach(function(year){
+        			//console.log(e[year]);
+        			console.log(e['Location']);
+        			numSet={e['Location']:e[year]};
+        		});
+        	});
+
+        	console.log(numSet);
+
+        	var circles=svg.selectAll('circle')
+    			.data(csv)
+    			.enter()
+    			.append('circle')
+    			.attr('x',function(d,i){return xScale((i*50)+25)})
+    			.attr('y',function(d,i){return yScale(i)});
+
+    		circles.attr('cx',function(d,i){
+    			//console.log(d);
+    			return xScale((i*50)+25);
+    		})
+    			.attr('id',function(d,i){
+    				return 'circle'+'-'+i;
+    			})
+    			.attr('cy',function(d,i){
+    				return yScale(i);
+    			})
+    			.attr('r',function(d){
+    				return 3;
+    			})
+    			.attr('fill','red')
+    	});
+
+		/*var xScale = d3.scale.linear()
+							.domain([0,d3.max(dataset)])
+							.range([0,500]);	
+		var axis = d3.svg.axis()
+						.scale(xScale)
+						.orient("bottom");*/
+
+	</script>
+</script>
+</body>
+<html>

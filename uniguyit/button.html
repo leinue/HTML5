@@ -1,0 +1,159 @@
+<htmnl>
+<head>
+	<meta charset="utf8">
+	<style type="text/css">
+
+		.box-area{
+			width: 100%;
+			margin-top: 12px;
+		}
+
+		.main-box{
+			padding: 10px;
+			color: rgb(31,31,31);
+			box-shadow: 0px 0px 6px 1px rgb(204,204,204);
+			margin-bottom: 12px;
+			cursor: pointer;
+			overflow: hidden;
+		}
+
+		.main-box:hover{box-shadow: 0px 0px 6px 0px #09C7F7;}
+
+
+		.red-circle{
+			background: #D56F2B!important;
+		}
+
+		.yellow-circle{
+			background: #FFFF00!important;
+		}
+
+		.green-circle{
+			background: #33FF00!important;
+		}
+
+		.main-box-del{
+			text-decoration: line-through;
+			color: rgb(137,137,137);
+		}
+
+		.main-box-circle{
+			width: 0.7em;
+			height: 0.7em;
+			border-radius: .35em;
+			background: #33FF00;
+			margin-right: 20px;
+			margin-top: 4px;
+		}
+
+		.main-content{
+			margin-left: 36px;
+			margin-top: -16px;
+			word-wrap: break-word; 
+			word-break: normal;
+		}
+
+		.mb-active{
+			box-shadow: 0px 0px 8px 0px #2680D9!important;
+		}
+	</style>
+</head>
+<body>
+	<div class="box-area">
+		<div onclick="changeStatus(this)" class="main-box">
+			<div class="main-box-circle"></div>
+		 	<div class="main-content">ddssdsddssdsddssdsddssdsddssdsddsssddssdsddssdsddssdsddssdsddssdsddsssddssdsddssdsddssdsddssdsddssdsddsssddssdsddssdsddssdsddssdsddssdsddsssddssdsddssdsddssdsddssdsddssdsddsssddssdsddssdsddssdsddssdsddssdsddsssddssdsddssdsddssdsddssdsddssdsddsssddssdsddss</div>
+		</div>
+		<div onclick="changeStatus(this)" class="main-box">
+			<div class="main-box-circle yellow-circle"></div>
+		 	<div class="main-content">elmlkds</div>
+		</div>
+		<div onclick="changeStatus(this)" class="main-box main-box-del">
+			<div class="main-box-circle red-circle"></div>
+		 	<div class="main-content">这是删除效果,给这个div的父div加main-box-del类</div>
+		</div>
+		<div onclick="changeStatus(this)" class="main-box">
+			<div class="main-box-circle green-circle"></div>
+		 	<div class="main-content">elmlkds</div>
+		</div>
+	</div>
+	<button onclick="back2Origin()">无</button>
+	<button onclick="change2Red()">红</button>
+	<button onclick="change2Yellow()">黄</button>
+	<button onclick="change2Green()">绿</button>
+	<button onclick="selectAll()">反选</button>
+	<button onclick="addNewBox()">新建</button>
+	<button onclick="selectAllOrNone()">全选/全不选</button>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+	<script type="text/javascript">
+
+		function changeStatus(obj){
+			$('.mb-active').toggleClass('mb-active');
+			$(obj).addClass('mb-active');
+		}
+
+		isAll=false;
+		function selectAllOrNone(){
+			if(isAll){
+				$('.main-box').addClass('mb-active');
+				isAll=false;
+			}else{
+				$('.main-box').removeClass('mb-active');
+				isAll=true;
+			}
+		}
+
+		function addNewBox(){
+			$('.box-area').append('<div onclick="changeStatus(this)" class="main-box"><div class="main-box-circle"></div><div class="main-content">dsfasmsak</div></div>');
+		}
+
+		function selectAll(){
+			$('.main-box').toggleClass('mb-active');
+		}
+
+		function toColor(colorName,isRed){
+			isRed=isRed==null?false:true;
+			colorName=colorName==null?'':colorName;
+			if(colorName!=''){
+				if($('.mb-active').length==0){
+					alert('没有选中的项目');
+				}else{
+					$('.mb-active .main-box-circle').attr('class','main-box-circle '+colorName+'-circle');
+					if(isRed){
+						$('.mb-active').attr('class','main-box mb-active main-box-del');					
+					}else{
+						$('.mb-active').removeClass('main-box-del');
+					}
+				}	
+			}else{
+				if($('.mb-active').length==0){
+					alert('没有选中的项目');
+				}else{
+					$('.mb-active').removeClass('main-box-del');
+					var colorList=['red','yellow','green'];
+					for (var i = 0; i < colorList.length; i++) {
+						$('.mb-active .main-box-circle').removeClass(colorList[i]+'-circle');
+					}
+					$('.mb-active').removeClass('.mb-active');
+				}
+			}
+		}
+
+		function back2Origin(){
+			toColor();
+		}
+
+		function change2Red(){
+			toColor('red',true);
+		}
+
+		function change2Yellow(){
+			toColor('yellow');
+		}
+
+		function change2Green(){
+			toColor('green');
+		}
+	</script>
+</body>
+</htmnl>

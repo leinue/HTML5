@@ -19,6 +19,10 @@
 
 		.main-box:hover{box-shadow: 0px 0px 6px 0px #09C7F7;}
 
+		.main-box input{
+			border: none;
+			width: 95%;
+		}
 
 		.red-circle{
 			background: #D56F2B!important;
@@ -66,7 +70,7 @@
 		</div>
 		<div onclick="changeStatus(this)" class="main-box">
 			<div class="main-box-circle yellow-circle"></div>
-		 	<div class="main-content">elmlkds</div>
+		 	<div class="main-content">dsdfdfd</div>
 		</div>
 		<div onclick="changeStatus(this)" class="main-box main-box-del">
 			<div class="main-box-circle red-circle"></div>
@@ -77,22 +81,27 @@
 		 	<div class="main-content">elmlkds</div>
 		</div>
 	</div>
-	<button onclick="back2Origin()">无</button>
-	<button onclick="change2Red()">红</button>
-	<button onclick="change2Yellow()">黄</button>
-	<button onclick="change2Green()">绿</button>
-	<button onclick="selectAll()">反选</button>
-	<button onclick="addNewBox()">新建</button>
-	<button onclick="selectAllOrNone()">全选/全不选</button>
+	<div class="btn-group">
+		<button onclick="back2Origin()">无</button>
+		<button onclick="change2Red()">红</button>
+		<button onclick="change2Yellow()">黄</button>
+		<button onclick="change2Green()">绿</button>
+		<button onclick="addNewBox('新的box')">新建</button>
+		<button onclick="selectAllOrNone()">全选/全不选</button>
+	</div>
 	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
 	<script type="text/javascript">
 
+		var isCtrlKeyPressed=false;
+
 		function changeStatus(obj){
-			$('.mb-active').toggleClass('mb-active');
+			if(!isCtrlKeyPressed){
+				$('.mb-active').toggleClass('mb-active');
+			}
 			$(obj).addClass('mb-active');
 		}
 
-		isAll=false;
+		var isAll=false;
 		function selectAllOrNone(){
 			if(isAll){
 				$('.main-box').addClass('mb-active');
@@ -103,8 +112,8 @@
 			}
 		}
 
-		function addNewBox(){
-			$('.box-area').append('<div onclick="changeStatus(this)" class="main-box"><div class="main-box-circle"></div><div class="main-content">dsfasmsak</div></div>');
+		function addNewBox(content){
+			$('.box-area').append('<div onclick="changeStatus(this)" class="main-box"><div class="main-box-circle"></div><div class="main-content">'+content+'</div></div>');
 		}
 
 		function selectAll(){
@@ -120,7 +129,7 @@
 				}else{
 					$('.mb-active .main-box-circle').attr('class','main-box-circle '+colorName+'-circle');
 					if(isRed){
-						$('.mb-active').attr('class','main-box mb-active main-box-del');					
+						$('.mb-active').attr('class','main-box mb-active main-box-del');
 					}else{
 						$('.mb-active').removeClass('main-box-del');
 					}
@@ -143,8 +152,25 @@
 			toColor();
 		}
 
+		function displayGreenBox(content){
+			$('.box-area').append('<div ondblclick="edit(this)" class="main-box edit-box"><div class="main-box-circle"></div><div class="main-content">'+content+'</div></div>');
+		}
+
+		function edit(obj){
+			if($(obj).find('.main-content').find('input').length==0){
+				var value=$(obj).find('.main-content').html();
+				$(obj).find('.main-content').html('');
+				$(obj).find('.main-content').append('<input value='+value+' type="text"><button onclick="submitGreenBox(this)">submit</button>');
+			}
+		}
+
+		function submitGreenBox(obj){
+			$(obj).parent().html($(obj).prev().val());
+		}
+
 		function change2Red(){
 			toColor('red',true);
+			displayGreenBox('绿色可编辑格子');
 		}
 
 		function change2Yellow(){
@@ -154,6 +180,26 @@
 		function change2Green(){
 			toColor('green');
 		}
+
+		$(document).bind("click",function(e){
+			var target=$(e.target);
+			if(target.closest(".main-box,.btn-group").length==0){
+				$('.mb-active').removeClass('mb-active');
+			};
+			e.stopPropagation();
+		});
+
+		$(document).keydown(function(e){
+			if(e.ctrlKey==1){
+				isCtrlKeyPressed=true;
+			}
+		});
+
+		$(document).keyup(function(e){
+			if(e.ctrlKey==1){
+				isCtrlKeyPressed=false;
+			}
+		});
 	</script>
 </body>
 </htmnl>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf8">
+	<title>angular order</title>
+	<script type="text/javascript" src="angular.min.js"></script>
+</head>
+
+<body ng-app="">
+	<div ng-controller="personController">
+		{{person.fullName() | uppercase | orderBy:'lastName'}}
+	</div>
+
+	<script type="text/javascript">
+		function personController($scope){
+			$scope.person={
+				firstName:'john',
+				lastName:'doe',
+				fullName:function(){
+					return $scope.person.firstName+' '+$scope.person.lastName;
+				}
+			};
+		}
+	</script>
+
+	<div ng-controller="namesController">
+		<input type="text" ng-model="name">
+		<ul>
+			<li ng-repeat="x in names | filter:name | orderBy:'country'">
+				{{(x.name|uppercase)+','+x.country}}
+			</li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+		function namesController($scope) {
+		    $scope.names = [
+		        {name:'Jani',country:'Norway'},
+		        {name:'Hege',country:'Sweden'},
+		        {name:'Kai',country:'Denmark'}
+		    ];
+		}
+	</script>
+</body>
+</html>

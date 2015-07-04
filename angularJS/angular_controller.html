@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf8">
+	<title>angular order</title>
+	<script type="text/javascript" src="angular.min.js"></script>
+</head>
+
+<body ng-app="">
+	
+	<div ng-controller="personController">
+		<input type="text" ng-model="person.firstName">
+		<input type="text" ng-model="person.lastName">
+		totle:{{person.fullName()}}
+	</div>
+	<script type="text/javascript">
+		function personController($scope){
+			$scope.person={
+				firstName:"John",
+				lastName:"doe",
+				fullName:function(){
+					var x;
+					x=$scope.person;
+					return x.firstName+' '+x.lastName;
+				}
+			}
+		}
+	</script>
+</body>
+</html>

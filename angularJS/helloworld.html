@@ -1,0 +1,28 @@
+<!doctype html>
+<html ng-app>
+    <head>
+        <script src="angular.min.js"></script>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        Hello {{'World'}}!
+
+        <div ng-app="" ng-init="quantity=1;cost=5">
+        	<p>总价:{{quantity*cost}}</p>
+        </div>
+
+        <div ng-app="" ng-init="firstName='John';lastName='Doe'">
+			<p>姓名: <span ng-bind="firstName + ' ' + lastName"></span></p>
+		</div>
+	
+		<p>Anaular object</p>
+		<div ng-app="" ng-init="person={shit:'john',fuck:'Doe'}">
+			<p>firstName:{{person.fuck}}</p>
+		</div>
+
+		<p>Angular Array</p>
+		<div ng-app="" ng-init="points=[0,1,2,3]">
+			<p>points={{points[2]}}</p>
+		</div>
+    </body>
+</html>

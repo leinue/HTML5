@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf8">
+	<title>angular html dom</title>
+	<script type="text/javascript" src="angular.min.js"></script>
+</head>
+
+<body ng-app="">
+	<div ng-controller="myController">
+		<button ng-click="count=count+1">click me</button>
+		<p>{{count}}</p>
+	</div>
+
+	<script>
+		function myController($scope){
+			$scope.count=0;
+		}
+	</script>
+
+	<div ng-controller="personController">
+		<button ng-click="toggle()">hide/show</button>
+		<p ng-hide="myVar">
+			<input type="text">
+			<input type="text">
+		</p>
+	</div>
+
+	<script type="text/javascript">
+		function personController($scope){
+			$scope.person={};
+			$scope.myVar=false;
+			$scope.toggle=function(){
+				$scope.myVar=!$scope.myVar;
+				console.log($scope.myVar);
+			};
+		}
+	</script>
+
+</body>
+</html>

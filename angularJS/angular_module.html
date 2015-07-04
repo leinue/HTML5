@@ -12,7 +12,15 @@
 		{{firstName+" "+lastName}}
 	</div>
 
-	<script type="text/javascript" src="myApp.js" ></script>
-	<script type="text/javascript" src="myCtrl.js"></script>
+	<!-- <script type="text/javascript" src="myApp.js" ></script>
+	<script type="text/javascript" src="myCtrl.js"></script> -->
+
+	<script type="text/javascript">
+		var app=angular.module("myApp",[]);
+		app.controller("myCtrl",function($scope){
+			$scope.firstName="fuck";
+			$scope.lastName="shit";
+		});
+	</script>
 </body>
 </html>

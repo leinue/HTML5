@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<meta charset="utf-8">
+	<script type="text/javascript" src="jquery.js"></script>
+
+	<style type="text/css">
+
+		body{
+			font-size: 14px;
+		}
+
+		.main-form{
+			border:1px solid rgb(216,216,216);
+			padding: .6em;
+			box-shadow: 0px 0px 6px 1px #CCC;
+			padding-left: 20px;
+			padding-right: 20px;
+			margin-bottom: 10px;
+		}
+
+		.main-person{
+			display: block;
+		}
+
+		.main-content{
+			display: block;
+			padding-top: 6px;
+		}
+
+		.main-detail{
+			margin-right: 20px;
+		}
+
+		.main-star{
+			margin-top: -20px;
+		}
+
+		.main-star ul{
+			list-style: none;
+			margin: 0;
+			margin-left: -40px;
+		}
+
+		.all-remark,.confirm-area{
+			width: 100%;
+			text-align: right;
+		}
+
+		.confirm-area button{
+			margin-right: -130px;
+		}
+
+		.confirm-area button.white{
+			margin-right: 10px;
+		}
+
+		.all-remark{
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+
+		.detail-container{
+			width: 100%;
+			margin-top: -10px;
+			z-index: 1000;
+			display: none;
+		}
+
+		.detail-menu{
+			width: 100%;
+			display: table;
+			border-bottom: 1px solid rgb(232,232,232);
+		}
+
+		.detail-menu ul{
+			list-style: none;
+			width:100%;
+			display: table-row;
+		}
+
+		.detail-menu ul li{
+			display: table-cell;
+			text-align: center;
+			border-right: 1px solid rgb(232,232,232);
+			cursor: pointer;
+			background: rgb(255,255,255);
+			width: 25%;
+		}
+
+		.detail-menu ul li.active{
+			background: rgb(35,124,244);
+			color: rgb(255,255,255);
+		}
+
+		.detail-menu ul li:first-child{
+			border-left: 1px solid rgb(232,232,232);
+		}
+
+		.detail-menu ul li:hover{
+			background: rgb(35,124,244);
+			color: rgb(255,255,255);
+		}
+
+		.detail-content{
+			width: 100%;
+		}
+
+		.detail-content ul{
+			width: 100%;
+			list-style: none;
+			margin: 0;
+			margin-left: -40px;
+		}
+
+		.detail-content ul li{
+			border-left: 1px solid rgb(232,232,232);
+			border-right: 1px solid rgb(232,232,232);
+			border-top: 1px solid rgb(232,232,232);
+		}
+
+		.detail-content ul li:last-child{
+			border-bottom: 1px solid rgb(232,232,232);
+		}
+
+		.main-title{
+			width: 100%;
+			text-align: center;
+			padding-bottom: 10px;
+		}
+
+		.detail-box-status{
+			margin: 20px;
+		}
+
+		.main-box-circle{
+		   width: 0.7em;
+		   height: 0.7em;
+		   border-radius: .35em;
+		   background: #33FF00;
+		   opacity: 1;
+		}
+
+		.red-circle{
+		   background: #D56F2B!important;
+		   opacity: 1;
+		}
+
+		.yellow-circle{
+		   background: #FFFF00!important;
+		   opacity: 1;
+		}
+
+		.green-circle{
+		   background: #33FF00!important;
+		   opacity: 1;
+		}
+
+		.opacity-circle{
+			opacity:0!important;
+		}
+
+		.detail-box-content{
+			padding-top:10px;
+			padding-bottom: 10px;
+		}
+
+		.customer-box .detail-box-content-time{
+			text-align: right;
+			padding-right: 10px;
+		}
+
+		.detail-box-content-time,.detail-box-content-person{
+			color: #797979;
+			font-size: 0.8em;
+		}
+
+		.customer-box .detail-box-content-person{
+			text-align: right;
+			padding-right: 10px;
+		}
+
+		.detail-box-content-person{
+			color: rgb(80,80,80);
+		}
+
+		.customer-box .detail-box-content-context{
+			color: rgb(80,80,80);
+		}
+
+		.detail-box-content-context,.detail-box-content-post{
+			color: rgb(78,204,255);
+			margin-top: 5px;
+			font-size: 1.1em;
+		}
+
+		.detail-box-content-post{
+			border-top: 1px solid rgb(225,225,225);
+		}
+
+		button{
+			border:1px solid rgb(127,185,255);
+			background: rgb(35,136,255);
+			background:-moz-linear-gradient(bottom, rgb(35,136,255),rgb(40,177,255));
+			background:-webkit-gradient(linear ,0 100%，100% 0，
+		                color-stop(0.14,rgb(35,136,255)),
+		                color-stop(1,rgb(40,177,255)));
+			border-radius: 4px;
+			padding:1px;
+			color: rgb(255,255,255);
+			padding-left: 22px;
+			padding-right: 22px;
+			cursor: pointer;
+		}
+
+		button:hover{
+			background:-moz-linear-gradient(bottom, rgb(45,146,255),rgb(50,187,255));
+			background:-webkit-gradient(linear ,0 100%，100% 0，
+		                color-stop(0.14,rgb(45,146,255)),
+		                color-stop(1,rgb(50,187,255)));
+		}
+
+		button.white{
+			background: rgb(250,250,250);
+			color: rgb(0,0,0);
+			border: 1px solid rgb(226,226,226);
+		}
+
+		button.white:hover{
+			background: rgb(240,240,240);
+		}
+
+		ul,li {
+			list-style:none
+		}
+
+		a {
+			color:#09f;
+		}
+
+		.star-box {
+			position:relative;
+			width:120px;
+			float:left;
+		}
+
+		.all-remark .stars-main{
+			margin-top: -16px;
+			float: right;
+			margin-left: 10px;
+		}
+
+		.stars-main{
+			margin-top: -22px;
+			margin-left: 110px;
+		}
+
+		.stars-main .description {
+			clear:both;
+			padding:10px 0px;
+		}
+
+		.stars-main .star {
+			height:20px;
+			width: 80px;
+			position:relative;
+			background:url(images/123.png) repeat-x;
+			cursor:pointer;
+		}
+
+		.stars-main .star li {
+			float:left;
+			padding:0px;
+			margin:0px;
+		}
+
+		.stars-main .star li a {
+			display:block;
+			width:24px;
+			height:20px;
+			overflow:hidden;
+			text-indent:-9999px;
+			position:absolute;
+			z-index:5;
+		}
+
+		.stars-main .star li a:hover {
+			background:url(images/123.png) 0 -25px repeat-x;
+			z-index:3;
+			left:0;
+		}
+
+		.stars-main .star a.one-star {
+			left:0;
+		}
+
+		.stars-main .star a.one-star:hover {
+			width:24px;
+		}
+
+		.stars-main .star a.two-stars {
+			left:24px;
+		}
+
+		.stars-main .star a.two-stars:hover {
+			width:48px;
+		}
+
+		.stars-main .star a.three-stars {
+			left:48px;
+		}
+
+		.stars-main .star a.three-stars:hover {
+			width:72px;
+		}
+
+		.stars-main .star a.four-stars {
+			left:72px;
+		}
+
+		.stars-main .star a.four-stars:hover {
+			width:96px;
+		}
+
+		.stars-main .star a.five-stars {
+			left:96px;
+		}
+
+		.stars-main .star a.five-stars:hover {
+			width:120px;
+		}
+
+		.stars-main .current-rating {
+			background:url(images/123.png) 0 -25px repeat-x;
+			position:absolute;
+			height:20px;
+			z-index:1;
+			top:0;
+			left:0
+		}
+
+		.current-rating{
+			left: -40px!important;
+		}
+
+		.all-remark .current-rating{
+			left: 0px !important;
+			top: 14px;
+		}
+
+	</style>
+</head>
+<body>
+
+	<div class="main-title">
+		对XX评分
+	</div>
+
+	<div class="box">
+		<div class="main-form">
+			<div class="main-person">客服08号</div>
+			<div class="main-content">
+				<div class="main-remark">
+					<div class="main-detail">
+						<button onclick="toggleDetail(this)">详情</button>
+					</div>
+					<div class="main-star">
+						<ul>
+							<li>成果质量
+								<div class="stars-main">
+									<div class="star-box">
+										<ul class="star" class="star">
+											<li><a href="javascript:void(0)" title="1" class="one-star">1</a></li>
+											<li><a href="javascript:void(0)" title="2" class="two-stars">2</a></li>
+											<li><a href="javascript:void(0)" title="3" class="three-stars">3</a></li>
+											<li><a href="javascript:void(0)" title="4" class="four-stars">4</a></li>
+											<li><a href="javascript:void(0)" title="5" class="five-stars">5</a></li>
+										</ul>
+										<div class="current-rating showb"></div>
+									</div>
+									<!--评价文字-->
+									<div class="description"></div>
+								</div>
+							</li>
+							<li>成果速度
+								<div class="stars-main">
+									<div class="star-box">
+										<ul class="star" class="star">
+											<li><a href="javascript:void(0)" title="1" class="one-star">1</a></li>
+											<li><a href="javascript:void(0)" title="2" class="two-stars">2</a></li>
+											<li><a href="javascript:void(0)" title="3" class="three-stars">3</a></li>
+											<li><a href="javascript:void(0)" title="4" class="four-stars">4</a></li>
+											<li><a href="javascript:void(0)" title="5" class="five-stars">5</a></li>
+										</ul>
+										<div class="current-rating showb"></div>
+									</div>
+									<!--评价文字-->
+									<div class="description"></div>
+								</div>
+							</li>
+							<li>成果售后
+								<div class="stars-main">
+									<div class="star-box">
+										<ul class="star" class="star">
+											<li><a href="javascript:void(0)" title="1" class="one-star">1</a></li>
+											<li><a href="javascript:void(0)" title="2" class="two-stars">2</a></li>
+											<li><a href="javascript:void(0)" title="3" class="three-stars">3</a></li>
+											<li><a href="javascript:void(0)" title="4" class="four-stars">4</a></li>
+											<li><a href="javascript:void(0)" title="5" class="five-stars">5</a></li>
+										</ul>
+										<div class="current-rating showb"></div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="all-remark">
+					总评
+					<div class="stars-main">
+						<div class="star-box">
+							<ul class="star" class="star">
+								<li><a href="javascript:void(0)" title="1" class="one-star"></a></li>
+								<li><a href="javascript:void(0)" title="2" class="two-stars"></a></li>
+								<li><a href="javascript:void(0)" title="3" class="three-stars"></a></li>
+								<li><a href="javascript:void(0)" title="4" class="four-stars"></a></li>
+								<li><a href="javascript:void(0)" title="5" class="five-stars"></a></li>
+							</ul>
+							<div class="current-rating showb"></div>
+						</div>
+						<!--评价文字-->
+						<div class="description"></div>
+					</div>
+				</div>
+				<div class="confirm-area">
+					<button class="white">取消</button>
+					<button>确定</button>
+				</div>
+			</div>
+		</div>
+		<div class="detail-container">
+			<div class="detail-menu">
+				<ul>
+					<li class="active">全部信息 9527</li>
+					<li>通过 999</li>
+					<li>待修正 666</li>
+					<li>修正 222</li>
+				</ul>
+			</div>
+			<div class="detail-content">
+				<ul>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle red-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+								<div class="detail-box-content-post">对不起,我们公司不允许私下与客户联系,请见谅</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box customer-box">
+							<div class="detail-box-status main-box-circle green-circle opacity-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">做XX需要多久</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="box">
+		<div class="main-form">
+			<div class="main-person">工程师08号</div>
+			<div class="main-content">
+				<div class="main-remark">
+					<div class="main-detail">
+						<button onclick="toggleDetail(this)">详情</button>
+					</div>
+					<div class="main-star">
+						<ul>
+							<li>成果质量
+								<div class="stars-main">
+									<div class="star-box">
+										<ul class="star" class="star">
+											<li><a href="javascript:void(0)" title="1" class="one-star">1</a></li>
+											<li><a href="javascript:void(0)" title="2" class="two-stars">2</a></li>
+											<li><a href="javascript:void(0)" title="3" class="three-stars">3</a></li>
+											<li><a href="javascript:void(0)" title="4" class="four-stars">4</a></li>
+											<li><a href="javascript:void(0)" title="5" class="five-stars">5</a></li>
+										</ul>
+										<div class="current-rating showb"></div>
+									</div>
+									<!--评价文字-->
+									<div class="description"></div>
+								</div>
+							</li>
+							<li>成果速度
+								<div class="stars-main">
+									<div class="star-box">
+										<ul class="star" class="star">
+											<li><a href="javascript:void(0)" title="1" class="one-star">1</a></li>
+											<li><a href="javascript:void(0)" title="2" class="two-stars">2</a></li>
+											<li><a href="javascript:void(0)" title="3" class="three-stars">3</a></li>
+											<li><a href="javascript:void(0)" title="4" class="four-stars">4</a></li>
+											<li><a href="javascript:void(0)" title="5" class="five-stars">5</a></li>
+										</ul>
+										<div class="current-rating showb" ></div>
+									</div>
+									<!--评价文字-->
+									<div class="description"></div>
+								</div>
+							</li>
+							<li>成果售后	
+								<div class="stars-main">
+									<div class="star-box">
+										<ul class="star" class="star">
+											<li><a href="javascript:void(0)" title="1" class="one-star">1</a></li>
+											<li><a href="javascript:void(0)" title="2" class="two-stars">2</a></li>
+											<li><a href="javascript:void(0)" title="3" class="three-stars">3</a></li>
+											<li><a href="javascript:void(0)" title="4" class="four-stars">4</a></li>
+											<li><a href="javascript:void(0)" title="5" class="five-stars">5</a></li>
+										</ul>
+										<div class="current-rating showb"></div>
+									</div>
+									<!--评价文字-->
+									<div class="description"></div>
+								</div>
+							</li>
+							<li>服务态度
+								<div class="stars-main">
+									<div class="star-box">
+										<ul class="star" class="star">
+											<li><a href="javascript:void(0)" title="1" class="one-star">1</a></li>
+											<li><a href="javascript:void(0)" title="2" class="two-stars">2</a></li>
+											<li><a href="javascript:void(0)" title="3" class="three-stars">3</a></li>
+											<li><a href="javascript:void(0)" title="4" class="four-stars">4</a></li>
+											<li><a href="javascript:void(0)" title="5" class="five-stars">5</a></li>
+										</ul>
+										<div class="current-rating showb"></div>
+									</div>
+									<!--评价文字-->
+									<div class="description"></div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="all-remark">
+					总评
+					<div class="stars-main">
+						<div class="star-box">
+							<ul class="star" class="star">
+								<li><a href="javascript:void(0)" title="1" class="one-star"></a></li>
+								<li><a href="javascript:void(0)" title="2" class="two-stars"></a></li>
+								<li><a href="javascript:void(0)" title="3" class="three-stars"></a></li>
+								<li><a href="javascript:void(0)" title="4" class="four-stars"></a></li>
+								<li><a href="javascript:void(0)" title="5" class="five-stars"></a></li>
+							</ul>
+							<div class="current-rating showb"></div>
+						</div>
+						<!--评价文字-->
+						<div class="description"></div>
+					</div>
+				</div>
+				<div class="confirm-area">
+					<button class="white">取消</button>
+					<button>确定</button>
+				</div>
+			</div>
+		</div>
+		<div class="detail-container">
+			<div class="detail-menu">
+				<ul>
+					<li class="active">全部信息 9527</li>
+					<li>通过 999</li>
+					<li>待修正 666</li>
+					<li>修正 222</li>
+				</ul>
+			</div>
+			<div class="detail-content">
+				<ul>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle red-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+								<div class="detail-box-content-post">对不起,我们公司不允许私下与客户联系,请见谅</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box customer-box">
+							<div class="detail-box-status main-box-circle green-circle opacity-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">做XX需要多久</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+
+		$('.main-star').css('margin-left',$('.main-detail button').width()+60);
+		$('.main-star').css('margin-top',-$('.main-detail button').height());
+		$('.detail-box-content').css('margin-top',-($('.detail-box-status').height()+33));
+		$('.detail-box-content').css('margin-left',$('.detail-box-status').width()+40);
+		$('.red-circle').next().find('.detail-box-content-context').css({
+			'color':'rgb(80,80,80)',
+			'text-decoration':'line-through'
+		});
+
+		function toggleDetail(obj){
+			var parent=$(obj).parent().parent().parent().parent().next();
+			$(parent).slideToggle();
+		}
+
+		$('.detail-menu ul li').click(function(){
+			$(this).parent().find('li').each(function(i,e){
+				if($(e).hasClass('active')){
+					$(e).removeClass('active');
+				}
+			});
+			// $('.detail-menu ul li.active').removeClass('active');
+			$(this).addClass('active');
+		});
+
+		$('.confirm-area button.white').click(function(){
+			var thisTop=$(this).parent().parent().parent().parent();
+			thisTop.slideToggle(function(){
+				thisTop.remove();
+			});
+		});
+
+		//star
+		$(document).ready(function(){
+		    var stepW = 24;
+		    var stars = $(".star > li");
+		    $(".showb").css("width",0);
+		    stars.each(function(i){
+		        $(stars[i]).click(function(e){
+		            var n = i+1;
+		            $(".showb").css({"width":stepW*n});
+		            // $(this).find('a').css('background','url(images/123.png) 0 -25px repeat-x');
+		            return stopDefault(e);
+		        });
+		    });
+		    stars.each(function(i){
+		        $(stars[i]).hover(
+
+		        );
+		    });
+		});
+
+		function stopDefault(e){
+		    if(e && e.preventDefault)
+		           e.preventDefault();
+		    else
+		           window.event.returnValue = false;
+		    return false;
+		};
+
+	</script>
+
+</body>
+</html>

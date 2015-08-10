@@ -215,6 +215,21 @@
 			cursor: pointer;
 		}
 
+		button.disabled{
+			border: 1px solid rgb(180,180,180);
+			background:-moz-linear-gradient(bottom, rgb(170,170,170),rgb(180,180,180));
+			background:-webkit-gradient(linear ,0 100%，100% 0，
+		                color-stop(0.14,rgb(170,170,170)),
+		                color-stop(1,rgb(170,170,170)));
+		}
+
+		button.disabled:hover{
+			background:-moz-linear-gradient(bottom, rgb(170,170,170),rgb(180,180,180));
+			background:-webkit-gradient(linear ,0 100%，100% 0，
+		                color-stop(0.14,rgb(170,170,170)),
+		                color-stop(1,rgb(170,170,170)));
+		}
+
 		button:hover{
 			background:-moz-linear-gradient(bottom, rgb(45,146,255),rgb(50,187,255));
 			background:-webkit-gradient(linear ,0 100%，100% 0，
@@ -260,6 +275,11 @@
 		.stars-main .description {
 			clear:both;
 			padding:10px 0px;
+		}
+
+		.description{
+			visibility: hidden;
+			padding:0!important;
 		}
 
 		.stars-main .star {
@@ -350,6 +370,10 @@
 			top: 14px;
 		}
 
+		.remark-count{
+			display: none;
+		}
+
 	</style>
 </head>
 <body>
@@ -360,6 +384,7 @@
 
 	<div class="box">
 		<div class="main-form">
+			<div class="remark-count">0</div>
 			<div class="main-person">客服08号</div>
 			<div class="main-content">
 				<div class="main-remark">
@@ -381,7 +406,7 @@
 										<div class="current-rating showb"></div>
 									</div>
 									<!--评价文字-->
-									<div class="description"></div>
+									<div class="description">0</div>
 								</div>
 							</li>
 							<li>成果速度
@@ -397,7 +422,7 @@
 										<div class="current-rating showb"></div>
 									</div>
 									<!--评价文字-->
-									<div class="description"></div>
+									<div class="description">0</div>
 								</div>
 							</li>
 							<li>成果售后
@@ -412,6 +437,8 @@
 										</ul>
 										<div class="current-rating showb"></div>
 									</div>
+									<!--评价文字-->
+									<div class="description">0</div>
 								</div>
 							</li>
 						</ul>
@@ -431,12 +458,12 @@
 							<div class="current-rating showb"></div>
 						</div>
 						<!--评价文字-->
-						<div class="description"></div>
+						<div class="description">0</div>
 					</div>
 				</div>
 				<div class="confirm-area">
 					<button class="white">取消</button>
-					<button>确定</button>
+					<button class="confirm disabled">确定</button>
 				</div>
 			</div>
 		</div>
@@ -499,6 +526,7 @@
 
 	<div class="box">
 		<div class="main-form">
+			<div class="remark-count">0</div>
 			<div class="main-person">工程师08号</div>
 			<div class="main-content">
 				<div class="main-remark">
@@ -520,7 +548,7 @@
 										<div class="current-rating showb"></div>
 									</div>
 									<!--评价文字-->
-									<div class="description"></div>
+									<div class="description">0</div>
 								</div>
 							</li>
 							<li>成果速度
@@ -536,7 +564,7 @@
 										<div class="current-rating showb" ></div>
 									</div>
 									<!--评价文字-->
-									<div class="description"></div>
+									<div class="description">0</div>
 								</div>
 							</li>
 							<li>成果售后	
@@ -552,7 +580,7 @@
 										<div class="current-rating showb"></div>
 									</div>
 									<!--评价文字-->
-									<div class="description"></div>
+									<div class="description">0</div>
 								</div>
 							</li>
 							<li>服务态度
@@ -568,7 +596,7 @@
 										<div class="current-rating showb"></div>
 									</div>
 									<!--评价文字-->
-									<div class="description"></div>
+									<div class="description">0</div>
 								</div>
 							</li>
 						</ul>
@@ -588,12 +616,12 @@
 							<div class="current-rating showb"></div>
 						</div>
 						<!--评价文字-->
-						<div class="description"></div>
+						<div class="description">0</div>
 					</div>
 				</div>
 				<div class="confirm-area">
 					<button class="white">取消</button>
-					<button>确定</button>
+					<button class="confirm disabled">确定</button>
 				</div>
 			</div>
 		</div>
@@ -681,10 +709,15 @@
 		});
 
 		$('.confirm-area button.white').click(function(){
-			var thisTop=$(this).parent().parent().parent().parent();
-			thisTop.slideToggle(function(){
-				thisTop.remove();
-			});
+			// var thisTop=$(this).parent().parent().parent().parent();
+			// thisTop.slideToggle(function(){
+			// 	thisTop.remove();
+			// });
+
+			$('.showb').css('width','0');
+			$('.description').html('0');
+			$('.confirm-area button.confirm').addClass('disabled');
+
 		});
 
 		//star
@@ -694,17 +727,45 @@
 		    var stars = $(".star > li");
 		    $(".showb").css("width",0);
 
-		    stars.each(function(i){
-		        $(stars[i]).hover(
+		    // stars.each(function(i){
+		    //     $(stars[i]).hover(
 
-		        );
-		    });
+		    //     );
+		    // });
 
 		    $('.star > li').click(function(){
+
 		    	var n=$(this).index()+1;
 		    	var showb=$(this).parent().next();
-		    	showb.css({"width":stepW*n});
-		    	return stopDefault(e);
+
+		    	var remarkCount=$(this).parent().parent().parent().parent().parent().parent().parent().parent().prev().prev();
+		    	var remarkCountHTML=remarkCount.html();
+
+		    	if(n===1 && showb.width()!==0 && showb.width()==stepW){
+		    		showb.css('width','0');
+		    		remarkCount.html(parseInt(remarkCount.html())-1);
+		    		if(parseInt(remarkCount.html())<4){
+		    			remarkCount.next().next().find('.confirm-area button.confirm').addClass('disabled');
+		    		}
+		    	}else{
+			    	
+			    	if(remarkCountHTML!=null){
+			    		if(showb.width()===0){
+			    			remarkCount.html(parseInt(remarkCountHTML)+1);
+			    		}
+			    	}else{
+			    		remarkCount=$(this).parent().parent().parent().parent().parent().prev().prev();
+			    		remarkCount.html(parseInt(remarkCount.html())+1);
+			    	}
+			    	showb.css({"width":stepW*n});
+		    	}
+
+		    	$(this).parent().parent().next().html(n);
+
+		    	if(remarkCount.html()=='4'){
+		    		remarkCount.next().next().find('.confirm-area button.disabled').removeClass('disabled');
+		    	}
+
 		    });
 
 		});

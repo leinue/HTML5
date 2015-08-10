@@ -741,14 +741,31 @@
 		    	var remarkCount=$(this).parent().parent().parent().parent().parent().parent().parent().parent().prev().prev();
 		    	var remarkCountHTML=remarkCount.html();
 
+		    	var liCount=remarkCount.next().next().find('.main-star ul').length;
+
+		    	if(liCount===0){
+		    		liCount=$(this).parent().parent().parent().parent().parent().find('.main-star ul').length;
+		    	}
+
 		    	if(n===1 && showb.width()!==0 && showb.width()==stepW){
 		    		showb.css('width','0');
-		    		remarkCount.html(parseInt(remarkCount.html())-1);
-		    		if(parseInt(remarkCount.html())<4){
-		    			remarkCount.next().next().find('.confirm-area button.confirm').addClass('disabled');
+		    		var allRemarkCount=$(this).parent().parent().parent().parent().parent().prev().prev();
+		    		if(remarkCount.html()!=null){
+		    			remarkCount.html(parseInt(remarkCount.html())-1);
+		    		}else{
+		    			allRemarkCount.html(parseInt(allRemarkCount.html())-2);
+		    		}
+		    		
+		    		if(remarkCount.html()!=null){
+		    			if(parseInt(remarkCount.html())<liCount){
+		    				remarkCount.next().next().find('.confirm-area button.confirm').addClass('disabled');    				
+		    			}
+		    		}else{
+		    			if(parseInt(allRemarkCount.html())<liCount){
+		    				allRemarkCount.next().next().find('.confirm-area button.confirm').addClass('disabled');    				
+		    			}
 		    		}
 		    	}else{
-			    	
 			    	if(remarkCountHTML!=null){
 			    		if(showb.width()===0){
 			    			remarkCount.html(parseInt(remarkCountHTML)+1);
@@ -762,7 +779,9 @@
 
 		    	$(this).parent().parent().next().html(n);
 
-		    	if(remarkCount.html()=='4'){
+		    	console.log(liCount);
+
+		    	if(remarkCount.html()==liCount){
 		    		remarkCount.next().next().find('.confirm-area button.disabled').removeClass('disabled');
 		    	}
 

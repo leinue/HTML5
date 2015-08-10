@@ -371,7 +371,7 @@
 							<li>成果质量
 								<div class="stars-main">
 									<div class="star-box">
-										<ul class="star" class="star">
+										<ul class="star">
 											<li><a href="javascript:void(0)" title="1" class="one-star">1</a></li>
 											<li><a href="javascript:void(0)" title="2" class="two-stars">2</a></li>
 											<li><a href="javascript:void(0)" title="3" class="three-stars">3</a></li>
@@ -689,22 +689,24 @@
 
 		//star
 		$(document).ready(function(){
+
 		    var stepW = 24;
 		    var stars = $(".star > li");
 		    $(".showb").css("width",0);
-		    stars.each(function(i){
-		        $(stars[i]).click(function(e){
-		            var n = i+1;
-		            $(".showb").css({"width":stepW*n});
-		            // $(this).find('a').css('background','url(images/123.png) 0 -25px repeat-x');
-		            return stopDefault(e);
-		        });
-		    });
+
 		    stars.each(function(i){
 		        $(stars[i]).hover(
 
 		        );
 		    });
+
+		    $('.star > li').click(function(){
+		    	var n=$(this).index()+1;
+		    	var showb=$(this).parent().next();
+		    	showb.css({"width":stepW*n});
+		    	return stopDefault(e);
+		    });
+
 		});
 
 		function stopDefault(e){

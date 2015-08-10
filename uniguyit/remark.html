@@ -165,6 +165,8 @@
 		.detail-box-content{
 			padding-top:10px;
 			padding-bottom: 10px;
+			margin-top: -40px;
+			margin-left: 40px;
 		}
 
 		.customer-box .detail-box-content-time{
@@ -379,6 +381,18 @@
 			margin-top: -18px;
 		}
 
+		.detail-approved{
+			display: none;
+		}
+
+		.detail-unfixed{
+			display: none;
+		}
+
+		.detail-fixed{
+			display: none;
+		}
+
 	</style>
 </head>
 <body>
@@ -475,14 +489,14 @@
 		<div class="detail-container">
 			<div class="detail-menu">
 				<ul>
-					<li class="active">全部信息 9527</li>
-					<li>通过 999</li>
-					<li>待修正 666</li>
-					<li>修正 222</li>
+					<li class="active" type="all">全部信息 9527</li>
+					<li type="approved">通过 999</li>
+					<li type="unfixed">待修正 666</li>
+					<li type="fixed">修正 222</li>
 				</ul>
 			</div>
 			<div class="detail-content">
-				<ul>
+				<ul class="detail-all">
 					<li>
 						<div class="detail-box">
 							<div class="detail-box-status main-box-circle green-circle"></div>
@@ -500,6 +514,135 @@
 								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
 								<div class="detail-box-content-person">客服01号</div>
 								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle red-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+								<div class="detail-box-content-post">对不起,我们公司不允许私下与客户联系,请见谅</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box customer-box">
+							<div class="detail-box-status main-box-circle green-circle opacity-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">做XX需要多久</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul class="detail-approved">
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle red-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+								<div class="detail-box-content-post">对不起,我们公司不允许私下与客户联系,请见谅</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box customer-box">
+							<div class="detail-box-status main-box-circle green-circle opacity-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">做XX需要多久</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul class="detail-unfixed">
+					<li>
+						<div class="detail-box customer-box">
+							<div class="detail-box-status main-box-circle green-circle opacity-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">做XX需要多久</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle red-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+								<div class="detail-box-content-post">对不起,我们公司不允许私下与客户联系,请见谅</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul class="detail-fixed">
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的</div>
 							</div>
 						</div>
 					</li>
@@ -633,14 +776,14 @@
 		<div class="detail-container">
 			<div class="detail-menu">
 				<ul>
-					<li class="active">全部信息 9527</li>
-					<li>通过 999</li>
-					<li>待修正 666</li>
-					<li>修正 222</li>
+					<li class="active" type="all">全部信息 9527</li>
+					<li type="approved">通过 999</li>
+					<li type="unfixed">待修正 666</li>
+					<li type="fixed">修正 222</li>
 				</ul>
 			</div>
 			<div class="detail-content">
-				<ul>
+				<ul class="detail-all">
 					<li>
 						<div class="detail-box">
 							<div class="detail-box-status main-box-circle green-circle"></div>
@@ -658,6 +801,135 @@
 								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
 								<div class="detail-box-content-person">客服01号</div>
 								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle red-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+								<div class="detail-box-content-post">对不起,我们公司不允许私下与客户联系,请见谅</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box customer-box">
+							<div class="detail-box-status main-box-circle green-circle opacity-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">做XX需要多久</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul class="detail-approved">
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle red-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+								<div class="detail-box-content-post">对不起,我们公司不允许私下与客户联系,请见谅</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box customer-box">
+							<div class="detail-box-status main-box-circle green-circle opacity-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">做XX需要多久</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul class="detail-unfixed">
+					<li>
+						<div class="detail-box customer-box">
+							<div class="detail-box-status main-box-circle green-circle opacity-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">做XX需要多久</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle red-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+								<div class="detail-box-content-post">对不起,我们公司不允许私下与客户联系,请见谅</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul class="detail-fixed">
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="detail-box">
+							<div class="detail-box-status main-box-circle green-circle"></div>
+							<div class="detail-box-content">
+								<div class="detail-box-content-time">2015-02-05 16:00:00</div>
+								<div class="detail-box-content-person">客服01号</div>
+								<div class="detail-box-content-context">你好,我是诸君信息科技的</div>
 							</div>
 						</div>
 					</li>
@@ -703,7 +975,8 @@
 			$(parent).slideToggle();
 		}
 
-		$('.detail-menu ul li').click(function(){
+		$('.detail-menu ul li').live('click',function(){
+			var currentType=$(this).parent().find('li.active').attr('type');
 			$(this).parent().find('li').each(function(i,e){
 				if($(e).hasClass('active')){
 					$(e).removeClass('active');
@@ -711,13 +984,19 @@
 			});
 			// $('.detail-menu ul li.active').removeClass('active');
 			$(this).addClass('active');
+
+			var type=$(this).attr('type');
+			var currentDetailPanel=$(this).parent().parent().next().find('ul.detail-'+currentType)[0];
+			$(currentDetailPanel).fadeOut();
+			var toDetailPanel=$(this).parent().parent().next().find('ul.detail-'+type)[0];
+			$(toDetailPanel).fadeIn();
 		});
 
 		$('.confirm-area button.white').live('click',function(){
+			
 			$('.showb').css('width','0');
 			$('.description').html('0');
 			$('.confirm-area button.confirm').addClass('dis');
-
 		});
 
 		$('.confirm-area button.confirm').live('click',function(){
@@ -790,8 +1069,6 @@
 
 		    	$(this).parent().parent().next().html(n);
 
-		    	console.log(liCount);
-
 		    	if(remarkCount.html()==liCount){
 		    		remarkCount.next().next().find('.confirm-area button.dis').removeClass('dis');
 		    	}
@@ -817,7 +1094,7 @@
 				itemHTML+='<li>'+item[elem]+'<div class="stars-main"> <div class="star-box"> <ul class="star" class="star"> <li><a href="javascript:void(0)" title="1" class="one-star">1</a></li> <li><a href="javascript:void(0)" title="2" class="two-stars">2</a></li> <li><a href="javascript:void(0)" title="3" class="three-stars">3</a></li> <li><a href="javascript:void(0)" title="4" class="four-stars">4</a></li> <li><a href="javascript:void(0)" title="5" class="five-stars">5</a></li> </ul> <div class="current-rating showb"></div> </div> <!--评价文字--> <div class="description">0</div> </div> </li>';
 			}
 
-			var html='<div class="box"> <div class="main-form"> <div class="remark-count">0</div> <div class="main-person">'+name+'</div> <div class="main-content"> <div class="main-remark"> <div class="main-detail"> <button onclick="toggleDetail(this)">详情</button> </div> <div class="main-star"> <ul> '+itemHTML+'</ul> </div> </div> <div class="all-remark"> 总评 <div class="stars-main"> <div class="star-box"> <ul class="star" class="star"> <li><a href="javascript:void(0)" title="1" class="one-star"></a></li> <li><a href="javascript:void(0)" title="2" class="two-stars"></a></li> <li><a href="javascript:void(0)" title="3" class="three-stars"></a></li> <li><a href="javascript:void(0)" title="4" class="four-stars"></a></li> <li><a href="javascript:void(0)" title="5" class="five-stars"></a></li> </ul> <div class="current-rating showb"></div> </div> <!--评价文字--> <div class="description">0</div> </div> </div> <div class="confirm-area"> <button class="white">取消</button> <button class="confirm dis">确定</button> </div> </div> </div> <div class="detail-container"> <div class="detail-menu"> <ul> <li class="active">全部信息 9527</li> <li>通过 999</li> <li>待修正 666</li> <li>修正 222</li> </ul> </div> <div class="detail-content"> <ul> <li> <div class="detail-box"> <div class="detail-box-status main-box-circle green-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">你好,我是诸君信息科技的</div> </div> </div> </li> <li> <div class="detail-box"> <div class="detail-box-status main-box-circle green-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div> </div> </div> </li> <li> <div class="detail-box"> <div class="detail-box-status main-box-circle red-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div> <div class="detail-box-content-post">对不起,我们公司不允许私下与客户联系,请见谅</div> </div> </div> </li> <li> <div class="detail-box customer-box"> <div class="detail-box-status main-box-circle green-circle opacity-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">做XX需要多久</div> </div> </div> </li> </ul> </div> </div> </div>';
+			var html='<div class="box"> <div class="main-form"> <div class="remark-count">0</div> <div class="main-person">'+name+'</div> <div class="main-content"> <div class="main-remark"> <div class="main-detail"> <button onclick="toggleDetail(this)">详情</button> </div> <div class="main-star"> <ul> '+itemHTML+'</ul> </div> </div> <div class="all-remark"> 总评 <div class="stars-main"> <div class="star-box"> <ul class="star" class="star"> <li><a href="javascript:void(0)" title="1" class="one-star"></a></li> <li><a href="javascript:void(0)" title="2" class="two-stars"></a></li> <li><a href="javascript:void(0)" title="3" class="three-stars"></a></li> <li><a href="javascript:void(0)" title="4" class="four-stars"></a></li> <li><a href="javascript:void(0)" title="5" class="five-stars"></a></li> </ul> <div class="current-rating showb"></div> </div> <!--评价文字--> <div class="description">0</div> </div> </div> <div class="confirm-area"> <button class="white">取消</button> <button class="confirm dis">确定</button> </div> </div> </div> <div class="detail-container"> <div class="detail-menu"> <ul> <li class="active" type="all">全部信息 '+detail.all+'</li> <li type="approved">通过 '+detail.approved+'</li> <li type="unfixed">待修正 '+detail.unfixed+'</li> <li type="fixed">修正 '+detail.fixed+'</li> </ul> </div> <div class="detail-content"><ul class="detail-all"> <li> <div class="detail-box"> <div class="detail-box-status main-box-circle green-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">你好,我是诸君信息科技的</div> </div> </div> </li> <li> <div class="detail-box"> <div class="detail-box-status main-box-circle green-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div> </div> </div> </li> <li> <div class="detail-box"> <div class="detail-box-status main-box-circle red-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div> <div class="detail-box-content-post">对不起,我们公司不允许私下与客户联系,请见谅</div> </div> </div> </li> <li> <div class="detail-box customer-box"> <div class="detail-box-status main-box-circle green-circle opacity-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">做XX需要多久</div> </div> </div> </li> </ul> <ul class="detail-approved"> <li> <div class="detail-box"> <div class="detail-box-status main-box-circle red-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div> <div class="detail-box-content-post">对不起,我们公司不允许私下与客户联系,请见谅</div> </div> </div> </li> <li> <div class="detail-box"> <div class="detail-box-status main-box-circle green-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">你好,我是诸君信息科技的</div> </div> </div> </li> <li> <div class="detail-box"> <div class="detail-box-status main-box-circle green-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div> </div> </div> </li> <li> <div class="detail-box customer-box"> <div class="detail-box-status main-box-circle green-circle opacity-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">做XX需要多久</div> </div> </div> </li> </ul> <ul class="detail-unfixed"> <li> <div class="detail-box customer-box"> <div class="detail-box-status main-box-circle green-circle opacity-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">做XX需要多久</div> </div> </div> </li> <li> <div class="detail-box"> <div class="detail-box-status main-box-circle green-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">你好,我是诸君信息科技的</div> </div> </div> </li> <li> <div class="detail-box"> <div class="detail-box-status main-box-circle green-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div> </div> </div> </li> <li> <div class="detail-box"> <div class="detail-box-status main-box-circle red-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div> <div class="detail-box-content-post">对不起,我们公司不允许私下与客户联系,请见谅</div> </div> </div> </li> </ul> <ul class="detail-fixed"> <li> <div class="detail-box"> <div class="detail-box-status main-box-circle green-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div> </div> </div> </li> <li> <div class="detail-box"> <div class="detail-box-status main-box-circle green-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">你好,我是诸君信息科技的</div> </div> </div> </li> <li> <div class="detail-box"> <div class="detail-box-status main-box-circle red-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">你好,我是诸君信息科技的9527号员工,对于翻译只能做到这种程度,如果你不满意就去起诉吧</div> <div class="detail-box-content-post">对不起,我们公司不允许私下与客户联系,请见谅</div> </div> </div> </li> <li> <div class="detail-box customer-box"> <div class="detail-box-status main-box-circle green-circle opacity-circle"></div> <div class="detail-box-content"> <div class="detail-box-content-time">2015-02-05 16:00:00</div> <div class="detail-box-content-person">客服01号</div> <div class="detail-box-content-context">做XX需要多久</div> </div> </div> </li> </ul></div> </div> </div>';
 
 			$('body').append(html);
 		}

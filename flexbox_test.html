@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>flex box test</title>
+	<style type="text/css">
+		
+		.flex{
+			display: flex;
+			display: -webkit-flex;
+			-webkit-flex-direction:row;
+			flex-direction:row;
+		}
+
+		.item{
+			width: 100px;
+			height: 100px;
+			border: 1px solid rgb(0,0,0);
+		}
+
+		.flex-column{
+			display: -webkit-flex;
+			display: flex;
+			-webkit-flex-direction:column;
+			flex-direction:column;
+		}
+
+		.flex-top{
+			display: -webkit-flex;
+			display: flex;
+			-webkit-flex-direction:row;
+			flex-direction:row;
+			-webkit-align-content:flex-start;
+			align-content:flex-start;
+		}
+
+		.flex-left{
+			display: -webkit-flex;
+			display: flex;
+			-webkit-flex-direction:row;
+			flex-direction:row;
+			-webkit-justify-content:flex-start;
+			justify-content:flex-start;
+		}
+
+		.flex-right{
+			display: -webkit-flex;
+			display: flex;
+			-webkit-flex-direction:row;
+			flex-direction:row;
+			-webkit-justify-content:flex-end;
+			justify-content:flex-end;
+		}
+
+		.flex-mid{
+			display: -webkit-flex;
+			display: flex;
+			-webkit-flex-direction:row;
+			flex-direction:row;
+			-webkit-align-itmes:center;
+			align-items:center;
+			-webkit-justify-content:center;
+			justify-content:center;
+		}
+
+		.bigitem{
+			-webkit-flex:2 0 0;
+			flex:2 0 0;
+		}
+
+		.smallitem{
+			-webkit-flex:1 0 0;
+			flex:1 0 0;
+		}
+
+		.flex_multi{
+			display: -webkit-flex;
+			display: flex;
+			-webkit-align-items:center;
+			align-items:center;
+			-webkit-justify-content:center;
+			justify-content:center;
+			-webkit-flex-direction:row;
+			flex-direction:row;
+			-webkit-flex-wrap:wrap;
+			flex-wrap:wrap;
+			-webkit-flex-flow:row wrap;
+			flex-flow:row wrap;
+			-webkit-align-content:flex-end;
+			align-content:flex-end;
+		}
+
+	</style>
+</head>
+<body>
+	
+	<p>按行排列</p>
+	<div class="flex">
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+	</div>
+
+	<p>按列排列</p>	
+	<div class="flex-column">
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+	</div>
+
+	<p>flex项目移动到顶部</p>
+	<div class="flex-top">
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+	</div>
+
+	<p>向左移动flex项目</p>
+	<div class="flex-left">
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+	</div>
+
+	<p>向右移动flex项目</p>
+	<div class="flex-right">
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+	</div>
+
+	<p>移动flex项目到中间</p>
+	<div class="flex-mid">
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+	</div>
+
+	<p>大项目</p>
+	<div class="bigitem">
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+	</div>
+
+	<p>多行包装</p>
+	<div class="flex_multi">
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+	</div>
+
+</body>
+</html>

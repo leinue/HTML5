@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+<meta name="Description" content="IVY DOM">
+<meta name="keywords" content="IVYDOM,哲♂学,动漫,编程,人工智能,自然语言处理,ACFUN,BILIBILI,宅" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/lightbox.css" media="screen">
+
+<title>ivydom</title>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/cufon-yui.js"></script>
+<script type="text/javascript" src="js/Harabara_700.js"></script>
+
+<!-- Cufon font replacement -->
+<script type="text/javascript">
+    Cufon.replace('ul#navigation li a', { textShadow: '0 2px rgba(0, 0, 0, 0.2)' });
+</script>
+<script type="text/javascript">
+    Cufon.replace('#social ul li a', {hover:true});
+</script>
+
+<!-- Lightbox implementation -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#work ul li a').lightBox();
+	});
+</script>
+
+<!-- Navigation and Content sliding effects -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#navigation a.about').css('opacity','0.6');
+		$('ul#navigation li').hover(function(){
+			$(this).stop().animate({marginRight:6}, 250);
+			}, function(){
+				$(this).stop().animate({marginRight:0}, 250)
+		});
+		$('#navigation a.about').click(function(){
+			$('#content').animate({'top':'0'},700);
+			$('#navigation a').css('opacity','1');
+			$(this).css('opacity','0.6');
+		});
+		$('#navigation a.work').click(function(){
+			$('#content').animate({'top':'-560'},700);
+			$('#navigation a').css('opacity','1');
+			$(this).css('opacity','0.6');
+		});
+		$('#navigation a.social').click(function(){
+			$('#content').animate({'top':'-1120'},700);
+			$('#navigation a').css('opacity','1');
+			$(this).css('opacity','0.6');
+		});
+		$('#navigation a.contact').click(function(){
+			$('#content').animate({'top':'-1680'},700);
+			$('#navigation a').css('opacity','1');
+			$(this).css('opacity','0.6');
+		});
+
+		// contact form validation
+		var hasChecked = false;
+		$(".standard #submit").click(function () { 
+			hasChecked = true;
+			return checkForm();
+		});
+		$(".standard #name,.standard #email,.standard #message").live('change click', function(){
+			if(hasChecked == true)
+			{
+				return checkForm();
+			}
+		});
+		function checkForm()
+		{
+			var hasError = false;
+			var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+
+			if($(".standard #name").val() == '') {
+				$(".standard #error-name").fadeIn();
+				hasError = true;
+			}else{
+				$(".standard #error-name").fadeOut();
+			}
+			if($(".standard #email").val() == '') {
+				$(".standard #error-email").fadeIn();
+				hasError = true;
+			}else if(!emailReg.test( $(".standard #email").val() )) {
+				$(".standard #error-email").fadeIn();
+				hasError = true;
+			}else{
+				$(".standard #error-email").fadeOut();
+			}
+			if($(".standard #message").val() == '') {
+				$(".standard #error-message").fadeIn();
+				hasError = true;
+			}else{
+				$(".standard #error-message").fadeOut();
+			}
+			if(hasError == true)
+			{
+				return false;
+			}else{
+				return true;
+			}
+		}
+		// end contact form validation
+	});
+</script>
+<!-- END JAVASCRIPT -->
+
+
+</head>
+  
+<body>
+
+<div id="wrapper">
+
+<!-- Site navigation -->
+<div id="left">
+    <ul id="navigation">
+        <li><a class="about" href="#">my lab</a></li>
+        <li><a class="work" href="#">about</a></li>
+        <li><a class="social" href="#">my social</a></li>
+        <li><a class="contact" href="#">contact</a></li>
+    </ul>
+</div>
+
+<!-- Site content -->
+<div id="right">
+    <div id="container">
+        <ul id="content">
+            <li id="about" class="content-block">
+                <img src="images/photo.gif" alt="photo">
+                <h2 class="name"><small>Belief</small>ivydom</h2>
+                <p><small><strong>Coding,Music,Lecture</strong></small> </p>
+                
+                <h3>Extension:</h3>
+                <ul>
+                    <li><a href="http://me.ivydom.com" target="_blank">Blog - 2009至今编程历程</a></li>
+                    <li><a href="http://tidy.ivydom.com" target="_blank">TidyCSS - 一款免费高效的响应式CSS3框架</a></li>
+                    <li><a href="javascript:alert('敬请期待!')">MongoLite - 纯JS实现的小型浏览器数据库系统</a></li>
+                    <li><a href="http://daily.ivydom.com" target="_blank">直呼日报 - PHP爬虫抓取的知乎日报数据</a></li>
+                    <li><a href="http://hocg.ivydom.com/index.php" target="_blank">HoCG - 记录个人画画的站点</a></li>
+                    <li><a href="http://ai.ivydom.com" target="_blank">人工智能实验基地 - 2011年高一时我的中二幻想</a></li>
+                </ul>
+          </li>
+            <li id="work">
+                
+                
+                <ul><li>
+                  <p>&nbsp;</p>
+                  <ul>
+				  <h3>Code Is Art</h3>
+                      <li>
+					  <p>&nbsp;</p>
+                        <p>愿我的成长能为这个世界带来惊喜</p>
+                      </li>
+                    <li><small><s>中二</s>,妄想狂,浮躁</small></li>
+                  </ul>
+                </li>
+                </ul>
+          </li>
+            <li id="social">
+                <ul>
+                    <li class="tecent"><img src="http://i45.tinypic.com/27xfreq.png"><a href="http://t.qq.com/IvyStk" target="_blank">tecent weibo</a></li>
+                    <li class="sina"><img src="http://i49.tinypic.com/10mpqjc.png"><a href="http://weibo.com/ivyppl" target="_blank">sina micro-blog</a></li>
+                </ul>
+            </li>
+            <li id="contact">
+                <h3>联系作者</h3>
+<!--<p>点击QQ联系我<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=597055914&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:597055914:52" alt="点击这里给我发消息" title="点击这里给我发消息"/></a></a></p>
+<p><img src="http://i49.tinypic.com/ibhu8y.jpg"><a href="mailto:597055914@qq.com">点击发送邮件给我</a></p>-->
+<p><img src="http://i45.tinypic.com/2hgzdzt.png"><a href="http://me.ivydom.com/guestbook" target="_blank">点击这里给我留言</a></p>
+                <h3>友情链接</h3>
+<a href="http://www.igeliya.com/" target="_blank">歌莉娅官方旗舰店</a>
+<a href="http://www.zhuoshini.org/
+" target="_blank">卓诗尼女鞋旗舰店</a>
+<a href="http://www.izimeitang.com/ 
+" target="_blank">姿美堂旗舰店</a>
+<a href=" http://www.okmba.com/
+" target="_blank">菲卡奴旗舰店</a>
+<a href="http://www.ideeremarchi.com/" target="_blank">迪尔马奇旗舰店</a>            </li>
+      </ul>
+    </div>
+</div>
+
+<div class="footer">        
+    <p>Copyright © 2009 - 2015 Ivydom. All Rights Reserved | <script src="http://s84.cnzz.com/stat.php?id=4644453&web_id=4644453" language="JavaScript"></script>
+</p>
+</div>
+    
+</div>
+
+</body>
+
+</html>

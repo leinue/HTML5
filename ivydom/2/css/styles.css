@@ -57,6 +57,7 @@ a:hover {
 	display: flex;
 	-webkit-flex-direction: column;
 	flex-direction: column;
+	z-index: 65535;
 }
 
 .menu-item {
@@ -151,17 +152,24 @@ footer {
 	width: 100%;
 }
 
-#main-quote-all {
+.article-tab {
+	display: none;
 	color: rgb(255,255,255);
 	/*width: 100%;*/
 	text-align: center;
 	letter-spacing: 0px;
-	font-size: 27px;
-	font-style: italic;
-	position: fixed;
 	overflow: hidden;
 	font-weight: 200;
-	display: none;
+}
+
+.article-tab .active {
+	display: block!important;
+}
+
+#main-quote-all {
+	font-style: italic;
+	font-size: 27px;
+	position: fixed;
 }
 
 .second-quote {
@@ -171,7 +179,6 @@ footer {
 	color: rgb(166, 147, 130);
 	font-family: pt_sans;
 	letter-spacing: 2.5px;
-	border-bottom: 1px solid rgb(166, 147, 130);
 }
 
 .line-quote {
@@ -181,9 +188,20 @@ footer {
 	width: 100%;
 	transform: matrix(0.00099999, 0, 0, 1, 0, 0);
 	margin-top: 15px;
-}
+/*	width: 280px;
+	margin: 8px auto;
+*/}
 
-#main-quote {
+.main-quote {
 	opacity: 0;
 	transform: matrix(1, 0, 0, 1, 0, 105.6451);
+}
+
+#quote2 {
+	display: none;
+}
+
+#main-intro {
+	color: rgb(255, 255, 255);
+	height: 100px;
 }

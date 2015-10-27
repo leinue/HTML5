@@ -171,31 +171,16 @@ footer {
 	color: rgb(166, 147, 130);
 	font-family: pt_sans;
 	letter-spacing: 2.5px;
+	border-bottom: 1px solid rgb(166, 147, 130);
 }
 
 .line-quote {
 	background: rgb(166, 147, 130);
 	height: 1px;
-	opacity: 1;
-	position: absolute;
-	width: 75px;
-}
-
-#line-quote1 {
-	left: 0px;
-	bottom: 8px;
-	transform: matrix(0, 0, 0, 1, 0, 0);
-}
-
-#line-quote2 {
-	right: 0px;
-	bottom: 8px;
-}
-
-#line-quote3 {
-	left: 80px;
-	bottom: 8px;
-	width: 200px;
+	opacity: 0;
+	width: 100%;
+	transform: matrix(0.00099999, 0, 0, 1, 0, 0);
+	margin-top: 15px;
 }
 
 #main-quote {

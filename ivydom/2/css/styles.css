@@ -1,3 +1,7 @@
+*{
+	transition:all 0.6s ease 0s;
+}
+
 html {
 	padding: 0px;
 	margin: 0px;
@@ -8,6 +12,15 @@ body {
 	padding: 0px;
 	margin: 0px;
 	height: 100%;
+}
+
+a {
+	text-decoration: none;
+	color: rgb(255,255,255);
+}
+
+a:hover {
+	color: rgb(170,170,170);
 }
 
 .flex-container {
@@ -25,6 +38,7 @@ body {
 .item-menu {
 	flex: 1 1 1;
 	-webkit-flex: 1 1 1;
+	/*background: rgb(38,18,30);*/
 }
 
 .item-detail {
@@ -48,14 +62,33 @@ body {
 .menu-item {
 	width: 100%;
 	height: 100px;
-	border: 1px solid rgb(0,0,0);
 	margin-bottom: 5px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.menu-item img {
+	cursor: pointer;
+}
+
+.menu-item img.sub-menu {
+	width: 50px;
+	height: 50px;
+}
+
+.menu-item .sub-menu-title {
+	color: rgb(76, 76, 76);
+	line-height: normal;
+	letter-spacing: 1px;
+	font-size: 12px;
+	padding: 6px;
 }
 
 .footer-container {
 	position: fixed;
 	bottom: -60px;
 	right: 20px;
+	opacity: 0;
 }
 
 footer {
@@ -63,6 +96,109 @@ footer {
 	transform: matrix(1, 0, 0, 1, 0, -80);
 	letter-spacing: 2.5px;
 	width: 720px;
-	height: 100px;
 	z-index: 4;
+	color: #838A96;
+	font-size: 10px;
+	text-align: center;
+	padding: 10px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	letter-spacing: 3px;
+	line-height: 1.6;
+}
+
+.footer-side {
+	margin-top: 15px;
+	border-top: 1px solid rgba(167, 148, 131, 0.5);
+	/*padding-top: 15px;*/
+	display: table;
+	width: 100%;
+}
+
+.footer-side ul {
+	list-style: none;
+	display: table-row;
+}
+
+.footer-side ul li {
+	display: table-cell;
+	border-right: 1px solid rgba(167, 148, 131, 0.5);
+	padding: 10px;
+}
+
+.logo-typo {
+	position: absolute;
+	cursor: pointer;
+	left: 127px;
+	top: 30px;
+	height: 33px;
+	color: rgb(255, 255, 255);
+	font-size: 1.5em;
+	font-weight: 100;
+	font-family: 'Lato';
+}
+
+.logo-typo:hover {
+	color: rgb(190, 173, 129);
+}
+
+.logo-typo span {
+	color: rgb(190, 173, 129);
+}
+
+.main-article {
+	width: 100%;
+}
+
+#main-quote-all {
+	color: rgb(255,255,255);
+	/*width: 100%;*/
+	text-align: center;
+	letter-spacing: 0px;
+	font-size: 27px;
+	font-style: italic;
+	position: fixed;
+	overflow: hidden;
+	font-weight: 200;
+	display: none;
+}
+
+.second-quote {
+	font-size: 11px;
+	text-align: center;
+	width: 100%;
+	color: rgb(166, 147, 130);
+	font-family: pt_sans;
+	letter-spacing: 2.5px;
+}
+
+.line-quote {
+	background: rgb(166, 147, 130);
+	height: 1px;
+	opacity: 1;
+	position: absolute;
+	width: 75px;
+}
+
+#line-quote1 {
+	left: 0px;
+	bottom: 8px;
+	transform: matrix(0, 0, 0, 1, 0, 0);
+}
+
+#line-quote2 {
+	right: 0px;
+	bottom: 8px;
+}
+
+#line-quote3 {
+	left: 80px;
+	bottom: 8px;
+	width: 200px;
+}
+
+#main-quote {
+	opacity: 0;
+	transform: matrix(1, 0, 0, 1, 0, 105.6451);
 }

@@ -8,6 +8,7 @@ $(function(){
 
 	var footerContainer = $('.footer-container');
 
+	//动态显示footer
 	footerContainer.css({
 		opacity: '1',
 		transition: 'all 3s ease 0s'
@@ -39,7 +40,7 @@ $(function(){
 		}
 
 		var shrinkLineQuote = function(line) {
-			for (var i = 0; i < 10000; i++) {
+			for (var i = 0; i < 1000; i++) {
 				var count = 0.00000 + i / 10000000;
 				line.css({
 					'opacity': '1',
@@ -51,7 +52,7 @@ $(function(){
 		}
 
 		var stretchLineQuote = function(line) {
-			for (var i = 10000; i > 0; i--) {
+			for (var i = 1000; i > 0; i--) {
 				var count =  i / (100000 * 0.00001);
 				line.css({
 					'opacity': '1',
@@ -156,6 +157,16 @@ $(function(){
 
 	$('.menu-container .menu-item').click(function() {
 
+		$('.sub-title-header').css({
+			'opacity': '0',
+			'transform': 'matrix(-0.9, 0, 0, 1, 0, 0)'
+		});
+
+		$('.full-text').css({
+			'opacity': '0',
+			'transform': 'matrix(-0.9, 0, 0, 1, 0, 0)'
+		});
+
 		var _this = $(this);
 		var id = _this.attr('id');
 
@@ -164,15 +175,40 @@ $(function(){
 		var articleTab = mainArticle.find('.article-tab');
 		var tabActive = mainArticle.find('.active');
 
+		var tabActiveId = tabActive.attr('id');
+
+		if(tabActiveId == 'main-' + id) {
+			return false;
+		}
+ 
 		var thisTab = $('#main-' + id);
 
 		thisTab.addClass('active');//标记当前tab为活跃页
-		thisTab.css({display: 'block'});//重新确认不隐藏,防止冲突
+		thisTab.css({display: 'block',opacity: 1});//重新确认不隐藏,防止冲突
 
 		tabActive.removeClass('active');//去掉当前活跃页活跃标记
-		tabActive.css({display: 'none'});//将活跃tab置不可视
+		tabActive.css({opacity: '0'});//将活跃tab置不可视
 
 		clearInterval(mainQuoteInterval);//清除主页面的interval指针
+
+		setTimeout(function() {
+			
+			for (var i = 0; i < 1000; i++) {
+				var count = (-0.9 + i / 1000) + 0.9; 
+				$('.sub-title-header').css({
+					'opacity': '1',
+					'transform': 'matrix(' + 1 + ', 0, 0, 1, 0, 0)',
+					'transition': 'all 1s ease 0s',
+				});
+
+				$('.full-text').css({
+					opacity: 1,
+					'transform': 'matrix(' + 1 + ', 0, 0, 1, 0, 0)',
+					'transition': 'all 1s ease 0s',
+				});
+			};
+
+		},10);
 
 		var idMethod = {
 
@@ -206,6 +242,97 @@ $(function(){
 			idMethod[id]();
 		}
 
+	});
+
+	var socialIcon = $('.footer-side ul li');
+
+	socialIcon.hover(function() {
+		var _this = $(this);
+		var _thisImg = _this.find('img');
+		var hoverSrc = _thisImg.attr('data-hover');
+		_thisImg.attr('src', 'imgs/' + hoverSrc + '.svg');
+		_thisImg.css({opacity: 1});
+
+		if(_this.attr('id') == 'weixin') {
+			$('.wx-container').css({
+				display: 'flex'
+			});
+		}
+
+	}, function() {
+		var _this = $(this);
+		var _thisImg = _this.find('img');
+		var normalSrc = _thisImg.attr('data-normal');
+		_thisImg.attr('src', 'imgs/' + normalSrc + '.svg');
+		_thisImg.css({opacity: 0.5});
+
+		if(_this.attr('id') == 'weixin') {
+			$('.wx-container').css({
+				display: 'none'
+			});
+		}
+	});
+
+	socialIcon.click(function() {
+		var thisId = $(this).attr('id');
+
+		if(thisId == 'weixin') {
+
+			return false;
+		}
+
+		window.open(thisId);
+	});
+
+	var productsItem = $('.products-item');
+	var currentIcon, currentMainProdText;
+	var mainProductIcon = $('.main-prod-icon');
+
+	productsItem.hover(function() {
+
+		var _this = $(this);
+		var thisIcon = _this.find('.main-prod-icon');
+		var thisMainProdText = _this.find('.main-prod-text');
+
+		currentIcon = thisIcon;
+		currentMainProdText = thisMainProdText;
+
+		for (var i = 64; i > 0; i--) {
+			thisIcon.css({
+				opacity: '1',
+				transform: 'matrix(1, 0, 0, 1, 0, ' + i + ')'
+			});
+		};
+
+		for (var i = -1; i > -30; i--) {
+			console.log(i);
+			thisMainProdText.css({
+				transform: 'matrix(1, 0, 0, 1, 0, ' + i + ')'
+			});
+		};
+
+	},function() {
+
+		for (var i = 0; i < 64; i++) {
+			currentIcon.css({
+				opacity: '0',
+				transform: 'matrix(1, 0, 0, 1, 0, ' + i + ')'
+			});
+		};
+
+		for (var i = -30; i < 0; i++) {
+			currentMainProdText.css({
+				transform: 'matrix(1, 0, 0, 1, 0, ' + i + ')'
+			});
+		};
+
+	});
+
+	mainProductIcon.click(function() {
+		var thisHref = $(this).attr('href');
+		if(typeof thisHref != 'undefined') {
+			window.open($(this).attr('href'));			
+		}
 	});
 
 });

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>dashed line</title>
+</head>
+<body>
+
+	<canvas id="canvas"></canvas>
+
+	<script type="text/javascript">
+
+		var canvas = document.getElementById('canvas');
+
+		var content = canvas.getContext('2d');
+
+		function saveDrawingSurface () {
+			drawingSurfaceImageData = content.getImageData(0, 0, canvas.width, canvas.height);
+		}
+
+		function restoreDrawingSurface () {
+			content.putImageData(drawingSurfaceImageData, 0, 0);
+		}
+
+		canvas.onmousedown = function (e) {
+			saveDrawingSurface();
+		}
+
+		function windowToCanvas (canvas, x, y) {
+			var bbox = canvas.getBoundingClientRect();
+
+			return {
+				x: x - bbox.left * (canvas.width / bbox.width),
+				y: y - bbox.top * (canvas.height / bbox.height)
+			};
+		}
+
+
+		canvas.onmousemove = function (e) {
+
+			var loc = windowToCanvas(e);
+
+			if(dragging) {
+				restoreDrawingSurface();
+
+				// if(guidewires) {
+				// 	drawgui
+				// }
+			}
+		}
+
+		canvas.onmouseup = function (e) {
+			restoreDrawingSurface();
+		}
+
+	</script>
+
+</body>
+</html>

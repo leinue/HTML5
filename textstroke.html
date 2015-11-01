@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>text stroke</title>
+</head>
+<body>
+
+	<canvas id="canvas"></canvas>
+
+	<script type="text/javascript">
+
+	var canvas = document.getElementById('canvas');
+	var contenxt = canvas.getContext('2d');
+	var fillCheckBox = document.getElementById('fillCheckBox');
+	var strokeCheckbox = document.getElementById('strokeCheckbox');
+	var shadowCheckbox = document.getElementById('shadowCheckbox');
+	var text = "HTML5";
+
+	function draw() {
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		drawBackground();
+
+		if(shadowCheckbox.selected) {
+			turnShadowsOn();
+		}else {
+			turnShadowsOff();
+		}
+
+		drawText();
+
+	}
+
+	function drawBackgroung() {
+		var STEP_Y = 12,
+			TOP_MARGIN = STEP_Y * 4,
+			LEFT_MARGIN = STEP_Y * 3,
+			I = context.canvas.height;
+
+		context.strokeStyle = 'lightgray';
+		context.lineWidth = 0.5;
+
+		while (i > TOP_MARGIN) {
+
+			context.beginPath();
+			context.moveTo(0, i);
+			context.lineTo(context.canvas.height, i);
+			context.stroke();
+			i -= STEP_Y;
+
+		}
+	}
+
+
+	</script>
+
+</body>
+</html>

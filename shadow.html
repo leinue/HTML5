@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>shadow</title>
+</head>
+<body>
+
+	<canvas id="canvas" width="800" height="800"></canvas>
+
+	<script type="text/javascript">
+
+		var SHADOW_COLOR = 'rgba(0,0,0,0.7)';
+
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+
+		function setIconShadow() {
+			context.shadowColor = SHADOW_COLOR;
+			context.shadowOffsetX = 2;
+			context.shadowOffsetY = 2;
+			context.shadowBlur = 6;
+		}
+
+		function setSelectedIconShadow() {
+			context.shadowColor = SHADOW_COLOR;
+			context.shadowOffsetY = 4;
+			context.shadowOffsetX = 4;
+			context.shadowBlur = 5;
+		}
+
+		setIconShadow();
+
+		context.fillRect(10, 10, 200,canvas.height/4-20);
+
+		/////////////////////////////////////////////////////////////////////////////
+
+		var hh = canvas.height/4;  
+        context.fillStyle="white";  
+        context.fillRect(0, hh, canvas.width, canvas.height/4);  
+        context.font = '60pt Calibri';  
+          
+        context.shadowColor = "RGBA(127,127,127,1)";  
+        context.shadowOffsetX = 3;  
+        context.shadowOffsetY = 3;  
+        context.shadowBlur = 0;  
+        context.fillStyle = "RGBA(0, 0, 0, 0.8)";  
+        context.fillText("Blur Canvas", 40, 80+hh);  
+
+		/////////////////////////////////////////////////////////////////////////////
+
+		var hh = canvas.height/4 + hh;  
+        context.fillStyle="black";  
+        context.fillRect(0, hh, canvas.width, canvas.height/4);  
+        for(var i = 0; i < 10; i++) {  
+            context.shadowColor = "RGBA(255, 255, 255," + ((10-i)/10) + ")";  
+            context.shadowOffsetX = i*2;  
+            context.shadowOffsetY = i*2;  
+            context.shadowBlur = i*2;  
+            context.fillStyle = "RGBA(127, 127, 127, 1)";  
+            context.fillText("Blur Canvas", 40, 80+hh);
+        }
+
+        /////////////////////////////////////////////////////////////////////////////
+
+        var hh = canvas.height/4 + hh;  
+        context.fillStyle="green";  
+        context.fillRect(0, hh, canvas.width, canvas.height/4);  
+        for(var i = 0; i < 10; i++) {  
+            context.shadowColor = "RGBA(255, 255, 255," + ((10-i)/10) + ")";  
+            context.shadowOffsetX = 0;  
+            context.shadowOffsetY = -i*2;  
+            context.shadowBlur = i*2;  
+            context.fillStyle = "RGBA(127, 127, 127, 1)";  
+            context.fillText("Blur Canvas", 40, 80+hh);  
+        }  
+        for(var i = 0; i < 10; i++)  
+        {  
+            context.shadowColor = "RGBA(255, 255, 255," + ((10-i)/10) + ")";  
+            context.shadowOffsetX = 0;  
+            context.shadowOffsetY = i*2;  
+            context.shadowBlur = i*2;  
+            context.fillStyle = "RGBA(127, 127, 127, 1)";  
+            context.fillText("Blur Canvas", 40, 80+hh);  
+        }  
+        for(var i = 0; i < 10; i++)  
+        {  
+            context.shadowColor = "RGBA(255, 255, 255," + ((10-i)/10) + ")";  
+            context.shadowOffsetX = i*2;  
+            context.shadowOffsetY = 0;  
+            context.shadowBlur = i*2;  
+            context.fillStyle = "RGBA(127, 127, 127, 1)";  
+            context.fillText("Blur Canvas", 40, 80+hh);  
+        }  
+        for(var i = 0; i < 10; i++)  
+        {  
+            context.shadowColor = "RGBA(255, 255, 255," + ((10-i)/10) + ")";  
+            context.shadowOffsetX = -i*2;  
+            context.shadowOffsetY = 0;  
+            context.shadowBlur = i*2;  
+            context.fillStyle = "RGBA(127, 127, 127, 1)";  
+            context.fillText("Blur Canvas", 40, 80+hh);  
+        }
+
+	</script>
+
+</body>
+</html>

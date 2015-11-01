@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>image</title>
+</head>
+	
+	<style type="text/css">
+
+		#canvas {
+			background: #eeeeee;
+			border: thin solid cornflowerblue;
+		}
+
+		#radios {
+			padding: 10px;
+		}
+
+	</style>
+
+<body>
+
+	<div id="radios">
+				
+			<input type="radio" id="repeatRadio" name="patternRadio" checked>repeat
+
+			<input type="radio" id="repeatXRadio" name="patternRadio">repeat-x
+
+			<input type="radio" id="repeatYRadio" name="patternRadio">repeat-y
+
+			<input type="radio" id="noRepeatRadio" name="patternRadio">no repeat
+
+	</div>
+
+	<canvas id="canvas" width="800" height="800"></canvas>
+
+	<script type="text/javascript">
+
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+
+		var repeatRadio = document.getElementById('repeatRadio');
+		var noRepeatRadio = document.getElementById('noRepeatRadio');
+		var repeatXRadio = document.getElementById('repeatXRadio');
+		var repeatYRadio = document.getElementById('repeatYRadio');
+
+		var image = new Image();
+
+		function fillCanvasWithPattern(repeatString) {
+
+			var pattern = context.createPattern(image, repeatString);
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			context.fillStyle = pattern;
+			context.fillRect(0, 0, canvas.width, canvas.height);
+
+		}
+
+		repeatRadio.onclick = function(e) {
+			fillCanvasWithPattern('repeat');
+		}
+
+		repeatYRadio.onclick = function(e) {
+			fillCanvasWithPattern('repeat-x');
+		}
+
+		repeatYRadio.onclick = function(e) {
+			fillCanvasWithPattern('repeat-y');
+		}
+
+		noRepeatRadio.onclick = function(e) {
+			fillCanvasWithPattern('no-repeat');
+		}
+
+		image.src="a.jpg";
+		image.onload = function(e) {
+			fillCanvasWithPattern('repeat');
+		}
+
+	</script>
+
+</body>
+</html>

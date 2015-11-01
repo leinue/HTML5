@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>simple rect</title>
+</head>
+<body>
+
+
+<canvas id="canvas" width="800" height="800"></canvas>
+
+<script type="text/javascript">
+	var canvas = document.getElementById('canvas');
+	var context = canvas.getContext('2d');
+
+	var gradient = context.createLinearGradient(0, 0, canvas.width, 0);
+
+	context.lineJoin = 'rouund';
+	context.lineWidth = 30;
+
+	context.font = '24px Helvetica';
+	context.fillText('Click anywhere to erase ', 175, 40);
+
+	context.strokeStyle = 'goldenrod';
+	context.fillStyle = 'rgba(0, 0, 255, 0.5)';
+
+	context.strokeRect(75, 100, 200, 200);
+	context.fillRect(325, 100, 200, 200);
+
+	context.canvas.onmousedown= function(e) {
+		context.clearRect(0, 0, canvas.width, canvas.height);
+	}
+
+
+</script>
+
+</body>
+</html>
